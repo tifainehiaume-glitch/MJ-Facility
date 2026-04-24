@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Styles for the body and header of index.html*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0e1dd;
+}
+header {
+    background-color: #6a687a;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+h2 {
+    color: #0d1317;
+    margin-bottom: 10px;
+}
