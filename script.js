@@ -43,7 +43,7 @@ function rollDice() {
         images.push(`<img src="D20/${value}.png" alt="D20">`);
     }
     for (let i = 0; i < numOfD100; i++) {
-        const value = Math.floor(Math.random() * 100) + 1;
+        const value = (Math.floor(Math.random() * 10) + 1) * 10;
         values.push(value);
         images.push(`<img src="D100/${value}.png" alt="D100">`);
     }
@@ -51,4 +51,12 @@ function rollDice() {
 
     diceResults.textContent = `Résultats: ${values.join(", ")}`;
     diceImages.innerHTML = images.join("");
+}
+
+function resetDice() {
+    const diceResults = document.getElementById("diceResult");
+    const diceImages = document.getElementById("diceImages");
+    
+    diceImages.innerHTML = "";
+    diceResults.textContent = "";
 }
