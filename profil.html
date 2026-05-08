@@ -7,21 +7,35 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
-    <header> 
-        <h1>MJ Facility</h1>
+
+    <header class="header"> 
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-dice">🎲</span>
+            <div class="header-logo-text">
+                <span class="header-logo-name">MJ Facility</span>
+            </div>
+        </a>
+
         <nav class="navbar">
-            <ul>
-                <li><a href="index.html">Lance tes dés</a></li>
-                <li><a href="profil.html">Mon profil</a></li>
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Lance tes dés</a></li>
+                <li><a href="profil.html" class="nav-link">Profil</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <div id="container">
-            <h2>Mon profil</h2>
-            <div class="connexion">
-                <h3>Me connecter</h3>
+
+    <main class="main">
+        <div class="container">
+            <div class="profil-container">
+
+                <div class="entete">
+                    <h1 class="titre">MJ Facility</h1>
+                    <div class="logo">🐺</div>
+                    <p class="sous-titre">Connecte-toi</p>
+                </div>
+
                 <form id="loginForm">
                     <label for="username">Nom d'utilisateur:</label>
                     <input type="text" id="username" name="username" required>
@@ -30,6 +44,7 @@
                     <button type="submit">Se connecter</button>
                 </form>
                 <p>Pas encore de compte ? <a href="minscrire.html">M'inscrire</a></p>
+                </div>
             </div>
         </div>
     </main>
