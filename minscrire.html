@@ -19,19 +19,47 @@
     </header>
 
 <main>
-    <div class="inscription-container">
-        <h2>Inscription</h2>
-        <form>
-            <label>Ton pseudo</label>
-            <input type="text" placeholder="Nom d'utilisateur" required>
-            <label>Ton e-mail</label>
-            <input type="email" placeholder="Adresse e-mail" required>
-            <label>Ton mot de passe</label>
-            <input type="password" placeholder="Mot de passe" required>
-            <label>Confirme ton mot de passe</label>
-            <input type="password" placeholder="Confirmer le mot de passe" required>
-            <button type="submit">M'inscrire</button>
-        </form>
+    <div class="container">
+        <div class="inscription-container">
+
+            <div class="entete">
+                <h1 class="titre">MJ Facility</h1>
+                <div class="logo">🐺</div>
+                <p class="sous-titre">Crée ton compte!</p>
+            </div>
+
+                <form id="inscriptionForm" onsubmit="soumettreInscription(event)">
+
+                    <div class="champ">
+                        <label for="pseudo">Ton pseudo</label>
+                        <input type="text" id="pseudo" placeholder="Nom d'utilisateur" required>
+                        <span id="pseudoError" class="error">Ton pseudo doit avoir au minimum 3 caractères.</span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="email">Ton e-mail</label>
+                        <input type="email" id="email" placeholder="Adresse e-mail" required>
+                        <span id="emailError" class="error">Ton addresse est invalide.</span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="password">Ton mot de passe</label>
+                        <input type="password" id="password" placeholder="Mot de passe" required>
+                        <span id="passwordError" class="error">Ton mot de passe doit avoir au minimum 8 caractères.</span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="confirmPassword">Confirme ton mot de passe</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirmer le mot de passe" required>
+                        <span id="confirmPasswordError" class="error">Les mots de passe ne correspondent pas.</span>
+                    </div>
+
+                    <button type="submit" class="bouton">M'inscrire</button>
+
+                    <p>Déjà inscrit ? <a href="connexion.html">Connecte-toi</a></p>
+                    
+                </form>
+        </div>
     </div>
 </main>
 
