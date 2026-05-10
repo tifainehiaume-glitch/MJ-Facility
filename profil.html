@@ -36,21 +36,43 @@
                     <p class="sous-titre">Connecte-toi</p>
                 </div>
 
-                <form id="loginForm">
-                    <label for="username">Nom d'utilisateur:</label>
-                    <input type="text" id="username" name="username" required>
-                    <label for="password">Mot de passe:</label>
-                    <input type="password" id="password" name="password" required>
-                    <button type="submit">Se connecter</button>
+                <div class="bannerError" id="bannerError">
+                    <p>Email ou mot de passe incorrect.</p>
+                </div>
+
+                <form id="loginForm" onsubmit="soumettreLogin(event)"> 
+
+                    <div>
+                        <label for="username">Nom d'utilisateur:</label>
+                        <input type="text" id="username" name="username" required>
+                        <span id="usernameError" class="error" ></span>
+                    </div>
+
+                    <div>
+                        <label for="password">Mot de passe:</label>
+                        <input type="password" id="password" name="password" required>
+                        <span id="passwordError" class="error"></span>
+                    </div>
+
+                    <button type="submit">Me connecter</button>
+                
                 </form>
-                <p>Pas encore de compte ? <a href="minscrire.html">M'inscrire</a></p>
+
+                <p class="link">
+                    Pas encore de compte ? <a href="minscrire.html">M'inscrire</a>
+                </p>
+
                 </div>
             </div>
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 MJ Facility. Tous droits réservés.</p>
+    <footer class="footer">
+        <div class="footer-left">
+            <span class="header-logo-dice">🎲</span>
+            <span class="header-logo-name">MJ Facility</span>
+        </div>
     </footer>
+
 </body>
 </html>
