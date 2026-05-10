@@ -34,6 +34,10 @@
                 <p class="sous-titre">Crée ton compte!</p>
             </div>
 
+            <div class="succes" id="succes">
+                <p>Inscription réussie ! Tu peux maintenant te connecter.</p>
+            </div>
+
                 <form id="inscriptionForm" onsubmit="soumettreInscription(event)">
 
                     <div class="champ">
@@ -44,7 +48,7 @@
 
                     <div class="champ">
                         <label for="email">Ton e-mail</label>
-                        <input type="email" id="email" placeholder="Adresse e-mail" required>
+                        <input type="email" id="email" placeholder="ton@email.com" required>
                         <span id="emailError" class="error">Ton addresse est invalide.</span>
                     </div>
 
@@ -75,7 +79,6 @@
             <span class="header-logo-dice">🎲</span>
             <span class="header-logo-name">MJ Facility</span>
         </div>
-        <div class="footer-right">
     </footer>
 </body>
 </html>

@@ -7,35 +7,72 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
-    <header> 
-        <h1>MJ Facility</h1>
+
+    <header class="header"> 
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-dice">🎲</span>
+            <div class="header-logo-text">
+                <span class="header-logo-name">MJ Facility</span>
+            </div>
+        </a>
+
         <nav class="navbar">
-            <ul>
-                <li><a href="index.html">Lance tes dés</a></li>
-                <li><a href="profil.html">Mon profil</a></li>
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Lance tes dés</a></li>
+                <li><a href="profil.html" class="nav-link">Profil</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <div id="container">
-            <h2>Mon profil</h2>
-            <div class="connexion">
-                <h3>Me connecter</h3>
-                <form id="loginForm">
-                    <label for="username">Nom d'utilisateur:</label>
-                    <input type="text" id="username" name="username" required>
-                    <label for="password">Mot de passe:</label>
-                    <input type="password" id="password" name="password" required>
-                    <button type="submit">Se connecter</button>
+
+    <main class="main">
+        <div class="container">
+            <div class="profil-container">
+
+                <div class="entete">
+                    <h1 class="titre">MJ Facility</h1>
+                    <div class="logo">🐺</div>
+                    <p class="sous-titre">Connecte-toi</p>
+                </div>
+
+                <div class="bannerError" id="bannerError">
+                    <p>Email ou mot de passe incorrect.</p>
+                </div>
+
+                <form id="loginForm" onsubmit="soumettreLogin(event)"> 
+
+                    <div class="champ">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="ton@email.com" required>
+                        <span id="emailError" class="error" >Adresse e-mail invalide.</span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="password">Mot de passe:</label>
+                        <input type="password" id="password" name="password" placeholder="mot de passe" required>
+                        <span id="passwordError" class="error">Le mot de passe est incorrect.</span>
+                    </div>
+
+                    <button type="submit">Me connecter</button>
+                
                 </form>
-                <p>Pas encore de compte ? <a href="minscrire.html">M'inscrire</a></p>
+
+                <p class="link">
+                    Pas encore de compte ? <a href="minscrire.html">M'inscrire</a>
+                </p>
+
+                </div>
             </div>
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 MJ Facility. Tous droits réservés.</p>
+    <footer class="footer">
+        <div class="footer-left">
+            <span class="header-logo-dice">🎲</span>
+            <span class="header-logo-name">MJ Facility</span>
+        </div>
     </footer>
+
 </body>
 </html>
