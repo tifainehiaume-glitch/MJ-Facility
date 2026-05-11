@@ -7,53 +7,74 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
-    <header> 
-        <h1>MJ Facility</h1>
+
+    <header class="header"> 
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-dice">🎲</span>
+            <div class="header-logo-text">
+                <span class="header-logo-name">MJ Facility</span>
+            </div>
+        </a>
+
         <nav class="navbar">
-            <ul>
-                <li><a href="index.html">Lance tes dés</a></li>
-                <li><a href="profil.html">Mon profil</a></li>
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Lance tes dés</a></li>
+                <li><a href="profil.html" class="nav-link">Profil</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
+
         <div id="container">
-        <h2>Lance tes dés !</h2>
-        <div class="dice-input">
-            <label>D4:</label>
-            <input type="number" min="0" max="10" id="d4" value="1">
+
+            <h2>Lance tes dés !</h2>
+
+                <div class="dice-input">
+                     <label>D4:</label>
+                    <input type="number" min="0" max="10" id="d4" value="1">
+                </div>
+
+                <div class="dice-input">
+                    <label>D6:</label>
+                    <input type="number" min="0" max="10" id="d6" value="1">
+                </div>
+
+                <div class="dice-input">
+                    <label>D8:</label>
+                    <input type="number" min="0" max="10" id="d8" value="1">
+                </div>
+
+                <div class="dice-input">
+                    <label>D10:</label>
+                    <input type="number" min="0" max="10" id="d10" value="1">
+                </div>
+
+                <div class="dice-input">
+                    <label>D12:</label>
+                    <input type="number" min="0" max="10" id="d12" value="1">
+                </div>
+
+                <div class="dice-input">
+                    <label>D20:</label>
+                    <input type="number" min="0" max="10" id="d20" value="1">
+                </div>
+
+                <div class="dice-input">
+                    <label>D100:</label>
+                    <input type="number" min="0" max="10" id="d100" value="1">
+                </div>
+
+            <button onclick="rollDice()">Lancer</button>
+            <button onclick="resetDice()">Effacer</button>
+            <div id="diceResult"></div>
+            <div id="diceImages"></div>
         </div>
-        <div class="dice-input">
-            <label>D6:</label>
-            <input type="number" min="0" max="10" id="d6" value="1">
-        </div>
-        <div class="dice-input">
-            <label>D8:</label>
-            <input type="number" min="0" max="10" id="d8" value="1">
-        </div>
-        <div class="dice-input">
-            <label>D10:</label>
-            <input type="number" min="0" max="10" id="d10" value="1">
-        </div>
-        <div class="dice-input">
-            <label>D12:</label>
-            <input type="number" min="0" max="10" id="d12" value="1">
-        </div>
-        <div class="dice-input">
-            <label>D20:</label>
-            <input type="number" min="0" max="10" id="d20" value="1">
-        </div>
-        <div class="dice-input">
-            <label>D100:</label>
-            <input type="number" min="0" max="10" id="d100" value="1">
-        </div>
-        <button onclick="rollDice()">Lancer</button>
-        <button onclick="resetDice()">Effacer</button>
-        <div id="diceResult"></div>
-        <div id="diceImages"></div>
-    </div>
+
     </main>
+
     <footer>
         <p>&copy; 2026 MJ Facility. Tous droits réservés.</p>
     </footer>
