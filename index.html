@@ -32,6 +32,8 @@
 
             <h2>Lance tes dés !</h2>
 
+            <div class="page-gauche">
+
                 <div class="dice-input">
                      <label for="d4">D4:</label>
                     <input type="number" id="d4" min="0" max="10" value="1">
@@ -67,11 +69,16 @@
                     <input type="number" id="d100" min="0" max="10" value="1">
                 </div>
 
-            <button type="button" onclick="rollDice()">Lancer</button>
-            <button type="button" onclick="resetDice()">Effacer</button>
-
-            <div id="diceResult"></div>
-            <div id="diceImages"></div>
+            </div>
+            
+            <div class="milieu-page">
+                <div id="diceResult"></div>
+                <div id="diceImages"></div>
+                <div class="buttons">
+                    <button type="button" class="btn-roll" onclick="rollDice()">🎲 Lancer</button>
+                    <button type="button" class="btn-reset" onclick="resetDice()">Effacer</button>
+                </div>
+            </div>
         </div>
 
     </main>
