@@ -53,3 +53,40 @@ body {
     color: var(--blanc-casse);
     letter-spacing: 1px;
 }
+
+/* navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-link {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-overflow: uppercase;
+    color: var(--blanc-casse);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.nav-link:active {
+    opacity: 1;
+    border: 1px solid var(--rouge);
+    border-radius: 0;
+}
