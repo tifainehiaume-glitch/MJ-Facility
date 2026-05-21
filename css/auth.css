@@ -1,0 +1,43 @@
+/* Mise en page */
+
+.main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* cadre du milieu */
+
+.container {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(107, 104, 120, 0.25);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+}
+
+.entete {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--rouge);
+}
+
+/* Entete */
+
+.logo {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.titre {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: var(--noir);
+    margin-bottom: 4px;
+}
+
