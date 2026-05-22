@@ -1,0 +1,58 @@
+/* Zone principale */
+
+main {
+    flex: 1;
+    padding: 2rem;
+    background: var(--blanc-casse);
+}
+
+#container {
+    display: flex;
+    max-width: 860px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(107, 104, 120, 0.25);
+    min-height: 500px;
+    overflow: hidden;
+}
+
+/* Colone de gauche */
+
+.page-gauche {
+    width: 200px;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(107, 104, 120, 0.15);
+    padding: 1.5rem;
+}
+
+.page-gauche h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--noir);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--rouge);
+    letter-spacing: 1px;
+}
+
+/* Lignes inputs pour les dés */
+
+.dice-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 0.5px solid rgba(107, 104, 120, 0.12);
+}
+
+.dice-input label {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--rouge);
+    opacity: 0.85;
+}
+
+/* Inputs pour les dés */
+
