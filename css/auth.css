@@ -41,3 +41,55 @@
     margin-bottom: 4px;
 }
 
+ .sous-titre {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    opacity: 0.75;
+ }
+
+/* Formulaire */
+
+.champ {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.champ label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rouge); 
+    opacity: 0.75;
+}
+
+.champ input {
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    padding: 10px 14px; 
+    border: 1px solid rgba(107, 104, 120, 0.3);
+    border-radius: 8px;
+    background: var( --blanc-casse); 
+    color: var(--noir);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.champ input:focus {
+    border-color: var(--or);
+}
+
+.champ input.valid {
+    border-color: rgba(107, 104, 120, 0.5);
+}
+
+.champ input.erreur-champ {
+    border-color: var(--rouge);
+}
+
