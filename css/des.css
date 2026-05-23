@@ -133,3 +133,73 @@ main {
 
 /* Boutons */
 
+.buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    width: 100%;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(107, 104, 120, 0.12);
+}
+
+/* Bouton Roll*/
+
+.btn-roll {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    color: var(--noir);
+    background: var(--rouge);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.6);
+    transition: background 0.2s, color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btn-roll:hover {
+    background: var(--or);
+    color: var(--noir);
+    box-shadow: 0 4px 15px rgba(168, 145, 58, 0.5);
+}
+
+.btn-roll:active {
+    background: #7a6a28;
+    color: var(--noir);
+    transform: scale(0.97);
+    box-shadow: none;
+}
+
+/* Bouton Reset */
+
+.btn-reset {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    color: var(--noir);
+    background: var(--gris-violet);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(107, 104, 120, 0.6);
+    transition: background 0.2s, color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btn-reset:hover {
+    background: var(--or);
+    color: var(--noir);
+    box-shadow: 0 4px 15px rgba(107, 104, 120, 0.5);
+}
+
+.btn-reset:active {
+    background: #7a6a28;
+    color: var(--noir);
+    transform: scale(0.97);
+    box-shadow: none;
+}
