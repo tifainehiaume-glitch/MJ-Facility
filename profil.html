@@ -30,7 +30,7 @@
 
     <main class="page-profil">
 
-        <div class="carte-compte-solo">
+        <div class="page-compte-solo">
             <div class="compte-header">
                 <span  class="compte-title">Mon Compte</span>
             </div>
@@ -55,17 +55,17 @@
             </div>
 
         </div>
-        /* Formulaire de la fiche */
+        <!-- Formulaire de la fiche -->
         <form id="form-fiche" onsubmit="sauvergardeFiche(event)">
 
-            /* Categorie: Identité */
+            <!-- Categorie: Identité -->
             <div class="fiche-container">
                 <div class="fiche-header">
                     <span class="fiche-title">Identité</span>
                 </div>
                 
                 <div class="fiche-body">
-                /*Accès non autorisé*/
+                <!-- Accès non autorisé -->
                     <div id="sans-acces">
                         <div class="message-centre">
                             <span class="message-icon">🔒</span>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                /*acces accordé mais sans fiche*/
+                <!-- acces accordé mais sans fiche -->
                     <div id="sans-fiche">
                         <div class="message-centre">
                             <span class="message-icon">📄</span>
@@ -85,7 +85,7 @@
                         </div>
                     </div>
 
-                /*acces accordé avec fiche*/
+                <!-- acces accordé avec fiche -->
                     <div id="avec-fiche">
                         <div class="grille-3">
                             <div class="champ-fiche">
@@ -93,7 +93,7 @@
                                 <input type="text" id="f-nom" name="nom">
                             </div>
 
-                            /*Race*/
+                            <!-- Race -->
 
                             <div class="champ-fiche">
                                 <label for="f-race">Race</label>
@@ -111,7 +111,7 @@
                                 <span id="err-race" class="error">Veuillez choisir une race.</span>
                             </div>
 
-                             /*Genre*/
+                             <!-- Genre -->
 
                             <div class="champ-fiche">
                                 <label for="f-genre">Genre</label>
@@ -127,14 +127,14 @@
                         </div>
 
                         <div class="grille-3">
-                            /*Age*/
+                            <!-- Age -->
                             <div class="champ-fiche">
                                 <label for="f-age">Age</label>
                                 <input type="number" id="f-age" name="age" min="1">
                                 <span id="err-age" class="error">Veuillez entrer un âge valide.</span>
                             </div>
 
-                            /*Terre Natale*/
+                            <!-- Terre Natale -->
                             <div class="champ-fiche">
                                 <label for="f-terre">Terre Natale</label>
                                 <select name="terre" id="f-terre">
@@ -153,7 +153,7 @@
                                 <span id="err-terre" class="error">Veuillez choisir une terre natale.</span>
                             </div>
 
-                            /*Statut Social*/
+                            <!-- Statut Social -->
                             <div class="champ-fiche">
                                 <label for="f-statut">Statut Social</label>
                                 <select name="statut" id="f-statut">
@@ -174,7 +174,7 @@
 
                         <div class="grille-2">
 
-                            /* Profession */
+                            <!-- Profession -->
                             <div class="champ-fiche">
                                 <label for="f-profession">Profession</label>
                                 <select name="profession" id="f-profession">
@@ -222,11 +222,11 @@
 
                 </div>
 
-                /* section cachée */
+                <!-- section cachée -->
 
-            <div id="sections-fiche">
+            <div id="section-fiche">
 
-                /* statistiques */
+                <!-- statistiques -->
                     <div id="fiche-containeur">
                         <div class="fiche-header">
                             <span class="fiche-title">Statistiques</span>
@@ -256,7 +256,7 @@
                     </div>
                 </div>
             
-            /* Compétences */
+            <!-- Compétences -->
                 <div class="fiche">
                     <div class="fiche-header">
                         <span class="fiche-title">Compétences</span>
@@ -265,7 +265,7 @@
                         <div class="grile-competences" id="grille-competences"></div>
                     </div>
 
-                /* Équipement */
+                <!-- Équipement -->
                 <div class="fiche">
                     <div class="fiche-header">
                         <span class="fiche-title">Équipement</span>
@@ -304,7 +304,7 @@
                     </div>
                 </div>
 
-                /* Entraiement et Notes*/
+                <!-- Entraiement et Notes-->
                 <div class="fiche">
                     <div class="fiche-header">
                         <span class="fiche-title">Entraînement &amp; Notes</span>
