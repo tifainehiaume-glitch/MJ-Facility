@@ -55,8 +55,282 @@
             </div>
 
         </div>
+        /* Formulaire de la fiche */
+        <form id="form-fiche" onsubmit="sauvergardeFiche(event)">
 
-        <form ></form>
+            /* Categorie: Identité */
+            <div class="fiche-container">
+                <div class="fiche-header">
+                    <span class="fiche-title">Identité</span>
+                </div>
+                
+                <div class="fiche-body">
+                /*Accès non autorisé*/
+                    <div id="sans-acces">
+                        <div class="message-centre">
+                            <span class="message-icon">🔒</span>
+                            <h3 class="message-title">Accès non autorisé</h3>
+                            <p class="message-text">Votre maitre de jeu ne vous a pas encore accordé l'accès à votre fiche de personnage.</p>
+                            <span class="badge-attente">✦ En attente de l'accord du MJ</span>
+                        </div>
+                    </div>
+
+                /*acces accordé mais sans fiche*/
+                    <div id="sans-fiche">
+                        <div class="message-centre">
+                            <span class="message-icon">📄</span>
+                            <h3 class="message-title">Aucune fiche de personnage trouvée</h3>
+                            <p class="message-text">Vous étes autorisé à créer votre fiche de personnage.</p>
+                            <button type="submit" id="btn-creer" class="btn-creer">✦ Créer ma fiche</button>
+                        </div>
+                    </div>
+
+                /*acces accordé avec fiche*/
+                    <div id="avec-fiche">
+                        <div class="grille-3">
+                            <div class="champ-fiche">
+                                <label for="f-nom">Nom</label>
+                                <input type="text" id="f-nom" name="nom">
+                            </div>
+
+                            /*Race*/
+
+                            <div class="champ-fiche">
+                                <label for="f-race">Race</label>
+                                <select name="race" id="f-race">
+                                    <option value="">— Choisir —</option>
+                                    <option value="humain">Humain</option>
+                                    <option value="elfe">Elfe</option>
+                                    <option value="nain">Nain</option>
+                                    <option value="semi-elfe">Semi-Elfe</option>
+                                    <option value="sorceleur">Sorceleur</option>
+                                    <option value="gnome">Gnome</option>
+                                    <option value="autre">Autre...</option>
+                                </select>
+                                <input type="text" id="f-race-autre" name="race-autre" placeholder="Précisez votre race..."/>
+                                <span id="err-race" class="error">Veuillez choisir une race.</span>
+                            </div>
+
+                             /*Genre*/
+
+                            <div class="champ-fiche">
+                                <label for="f-genre">Genre</label>
+                                <select name="genre" id="f-genre">
+                                    <option value="">— Choisir —</option>
+                                    <option value="femme">Femme</option>
+                                    <option value="homme">Homme</option>
+                                    <option value="non-binaire">Non-binaire</option>
+                                </select>
+                                <span id="err-genre" class="error">Veuillez choisir un genre.</span>
+                            </div>
+                            
+                        </div>
+
+                        <div class="grille-3">
+                            /*Age*/
+                            <div class="champ-fiche">
+                                <label for="f-age">Age</label>
+                                <input type="number" id="f-age" name="age" min="1">
+                                <span id="err-age" class="error">Veuillez entrer un âge valide.</span>
+                            </div>
+
+                            /*Terre Natale*/
+                            <div class="champ-fiche">
+                                <label for="f-terre">Terre Natale</label>
+                                <select name="terre" id="f-terre">
+                                    <option value="">— Choisir —</option>
+                                    <option value="nilfgaard">Nilfgaard</option>
+                                    <option value="temeria">Temeria</option>
+                                    <option value="redania">Redania</option>
+                                    <option value="kaedwen">Kaedwen</option>
+                                    <option value="aedirn">Aedirn</option>
+                                    <option value="skellige">Skellige</option>
+                                    <option value="kaer-morhen">Kaer Morhen</option>
+                                    <option value="cintra">Cintra</option>
+                                    <option value="autre">Autre...</option>
+                                </select>
+                                <input type="text" id="f-terre-autre" name="terre-autre" placeholder="Précisez votre terre natale..."/>
+                                <span id="err-terre" class="error">Veuillez choisir une terre natale.</span>
+                            </div>
+
+                            /*Statut Social*/
+                            <div class="champ-fiche">
+                                <label for="f-statut">Statut Social</label>
+                                <select name="statut" id="f-statut">
+                                    <option value="">— Choisir —</option>
+                                    <option value="noble">Noble</option>
+                                    <option value="artisant">Artisant</option>
+                                    <option value="paysan">Paysan</option>
+                                    <option value="hors-la-loi">Hors-la-loi</option>
+                                    <option value="mercenaire">Mercenaire</option>
+                                    <option value="mage-de-la-cour">Mage de la cour</option>
+                                    <option value="clerc">Clerc</option>
+                                    <option value="autre">Autre...</option>
+                                </select>
+                                <input type="text" id="f-statut-autre" name="statut-autre" placeholder="Précisez votre statut social..."/>
+                                <span id="err-statut" class="error">Veuillez choisir un statut social.</span>
+                            </div>
+                        </div>
+
+                        <div class="grille-2">
+
+                            /* Profession */
+                            <div class="champ-fiche">
+                                <label for="f-profession">Profession</label>
+                                <select name="profession" id="f-profession">
+                                    <option value="">— Choisir —</option>
+                                    <option value="sorceleur">Sorceleur</option>
+                                    <option value="barde">Barde</option>
+                                    <option value="medecin">Médecin</option>
+                                    <option value="mage">Mage</option>
+                                    <option value="marchand">Marchand</option>
+                                    <option value="criminel">Criminel</option>
+                                    <option value="pretre">Prêtre</option>
+                                    <option value="soldat">Soldat</option>
+                                    <option value="autre">Autre...</option>
+                                </select>
+                                <input type="text" id="f-profession-autre" name="profession-autre" placeholder="Précisez votre profession..."/>
+                                <span id="err-profession" class="error">Veuillez choisir une profession.</span>
+                            </div>
+
+                            <div class="champ-fiche">
+                                <label for="f-comp-exclu">Compétences Exclusives</label>
+                                <select name="competenceExclu" id="f-comp-exclu">
+                                    <option value="">— Choisir —</option>
+                                    <option value="connaisances-monstres">Connaisances des monstres</option>
+                                    <option value="alchimie">Alchimie</option>
+                                    <option value="incantations">Incantations</option>
+                                    <option value="escrime">Escrime</option>
+                                    <option value="survie">Survie</option>
+                                    <option value="medecine">Médecine</option>
+                                    <option value="bagarre">Bagarre</option>
+                                    <option value="persuasion">Persuasion</option>
+                                    <option value="seduction">Séduction</option>
+                                    <option value="artisanat">Artisanat</option>
+                                    <option value="autre">Autre...</option>
+                                </select>
+                                <input type="text" id="f-comp-exclu-autre" name="competenceExclu-autre" placeholder="Précisez votre compétence exclusive..."/>
+                                <span id="err-comp-exclu" class="error">Veuillez choisir une compétence exclusive.</span>
+                            </div>
+
+                            <div class="champ-fiche">
+                                <label for="f-particularite">Particularité</label>
+                                <textarea name="particularite" id="f-particularite" placeholder="Décrivez vos particularités..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                /* section cachée */
+
+            <div id="sections-fiche">
+
+                /* statistiques */
+                    <div id="fiche-containeur">
+                        <div class="fiche-header">
+                            <span class="fiche-title">Statistiques</span>
+                        </div>
+                        <div class="fiche-body">
+                            <div class="grille-stats">
+                                <div>
+                                    <h3 class="section-title">Caractéristiques</h3>
+                                    <div class="stats-col" id="col-caracteristiques"></div>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Dérivées</h3>
+                                    <div class="stats-col" id="col-derivees"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grille-stats-extra">
+                            <div class="champ-fiche">
+                                <label for="f-reputation">Réputation</label>
+                                <input type="number" id="f-reputation" name="reputation" min="0"/>
+                            </div>
+                            <div class="champ-fiche">
+                                <label for="f-progression">Progression</label>
+                                <input type="number" id="f-progression" name="progression" min="0"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            /* Compétences */
+                <div class="fiche">
+                    <div class="fiche-header">
+                        <span class="fiche-title">Compétences</span>
+                    </div>
+                    <div class="fiche-body">
+                        <div class="grile-competences" id="grille-competences"></div>
+                    </div>
+
+                /* Équipement */
+                <div class="fiche">
+                    <div class="fiche-header">
+                        <span class="fiche-title">Équipement</span>
+                    </div>
+                    <div class="fiche-body">
+                        <div class="grile-equipement">
+
+                            <div>
+                                <p class="section-title">Arme primaire</p>
+                                <div class="arme-row"><span class="arme-label">Precision</span><input type="text" class="arme-input" name="arme-precision"></div>
+                                <div class="arme-row"><span class="arme-label">Dégâts</span><input type="text" class="arme-input" name="arme-degats"></div>
+                                <div class="arme-row"><span class="arme-label">Fiabilité</span><input type="text" class="arme-input" name="arme-fiabilite"></div>
+                                <div class="arme-row"><span class="arme-label">Mains</span><input type="text" class="arme-input" name="arme-mains"></div>
+                                <div class="arme-row"><span class="arme-label">Portée</span><input type="text" class="arme-input" name="arme-portee"></div>
+                                <div class="arme-row"><span class="arme-label">Effet</span><input type="text" class="arme-input" name="arme-effet"></div>
+                                <div class="arme-row"><span class="arme-label">Dissimulation</span><input type="text" class="arme-input" name="arme-dissimulation"></div>
+                                <div class="arme-row"><span class="arme-label">Amélioration</span><input type="text" class="arme-input" name="arme-amelioration"></div>
+                                <div class="arme-row"><span class="arme-label">Poids</span><input type="text" class="arme-input" name="arme-poids"></div>
+                            </div>
+
+                            <div>
+                                <p class="section-title">Armure</p>
+                                <table>
+                                 <thead>
+                                        <tr>
+                                            <th>Localisation</th>
+                                            <th>PA</th>
+                                            <th>Dégats</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody-armure"></tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                /* Entraiement et Notes*/
+                <div class="fiche">
+                    <div class="fiche-header">
+                        <span class="fiche-title">Entraînement &amp; Notes</span>
+                    </div>
+                    <div class="fiche-body">
+                        <div class="grille-2">
+                            <div class="champ-fiche">
+                                <label for="f-entrainement">Entraînement</label>
+                                <textarea name="entrainement" id="f-entrainement"></textarea>
+                            </div>
+                            <div class="champ-fiche">
+                                <label for="f-notes">Notes</label>
+                                <textarea name="notes" id="f-notes"></textarea>
+                            </div>
+                        </div>
+                        <div class="champ-fiche champ-aptitudes">
+                            <label for="f-aptitudes">Aptitudes professionnelles</label>
+                           <textarea name="aptitudes" id="f-aptitudes"></textarea>
+                        </div>
+                      <button type="submit" id="btn-sauvegarder" class="btn-sauvegarder">✦ Sauvegarder la fiche</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        
     </main>
 
     <footer class="footer">
