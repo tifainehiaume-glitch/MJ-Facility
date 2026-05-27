@@ -362,3 +362,98 @@
 .competence-input:focus { border-color: var(--or); }
 
 /*équipement*/
+.grille-equipement {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.arme-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    border-bottom: 1px solid rgba(107, 104, 120, 0.1);
+}
+
+.arme-row:last-child {border-bottom: none; }
+.arme-label { font-size: 11px; color: var(--or); }
+
+.arme.input {
+    width: 100px;
+    padding: 2px 6px;
+    border: 1px solid rgba(107, 104, 120, 0.30);
+    border-radius: 4px;
+    background: white;
+    font-family: 'crimson text', serif;
+    font-size: 12px;
+    outline: none;
+}
+
+.arme.input:focus {border-color: var(--or); }
+
+/*Tableau armure*/
+
+table {width: 100%; border-collapse: collapse; font-size: 11px; }
+
+th {
+    font-family: 'cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: white;
+    background: var(--gris-violet);
+    padding: 5px 6px;
+    text-align: left;
+}
+
+td {
+    padding: 4px 6px;
+    border-bottom: 1px solid rgba(107, 104, 120, 0.1);
+    color: var(--noir);
+}
+
+tr:last-child td {border-bottom: none; }
+
+.td-input {
+    width: 60px;
+    padding: 1px 4px;
+    border: 1px solid rgba(107, 104, 120, 0.30);
+    border-radius: 3px;
+    background: white;
+    font-family: 'crimson text', serif;
+    font-size: 11px;
+    outline: none;
+}
+
+.td-input:focus { border-color: var(--or); }
+
+/*Boutons*/
+
+.btn-creer, .btn-sauvegarder {
+    font-family: 'cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 13px;
+    color: var(--noir);
+    background: var(--rouge);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.5);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    margin-top: 1rem;
+}
+
+.btn-creer:hover, .btn-sauvegarder:hover {
+    background: var(--or);
+    box-shadow: 0 6px 20px rgba(168, 145, 58, 0.5);
+}
+
+.btn-creer:active, .btn-sauvegarder:active {
+    transform: scale(0.97);
+    box-shadow: none;
+}
