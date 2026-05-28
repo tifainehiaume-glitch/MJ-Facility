@@ -415,3 +415,18 @@ async function sauvegarderFiche(event) {
     }
 }
 
+/* deconnexion */
+
+btnDeconnexion.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    window.location.href = '/html/connexion.html'
+});
+
+/* initilisation */
+
+genererStats(statsCaracteristiques,   'col-caracteristiques');
+genererStats(statsDerivees,           'col-derivees');
+genererCompetences();
+genererArmure();
+initChampsAvecAutre();
+chargerProfil();
