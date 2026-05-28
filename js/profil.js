@@ -387,3 +387,31 @@ function collecterFiche() {
     };
 }
 
+/* Sauvegarde */
+
+async function sauvegarderFiche(event) {
+    event.preventDefault();
+
+    const token = localStorage.getItem('token');
+    const fiche = collecterFiche();
+
+    try {
+        const reponse = await fetch('/api/profil/fiche', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer' + token
+            },
+            body: JSON.stringify(fiche)
+        });
+        if (reponse.ok) {
+            alerte('Fiche sauvegardée !');
+        } else {
+            alerte('Erreur lords de la sauvegarde. ');
+        }
+    } catch (error) {
+        console.error('Erreur sauvegarde:', error);
+        alerte('Impossible de contacter me serveur.');
+    }
+}
+
