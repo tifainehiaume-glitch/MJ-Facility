@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MJ Facility</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+    <script src="/js/admin.js" defer></script>
+</head>
+
+<body>
+
+    <header class="header"> 
+        <a href="index.html" class="header-logo">
+            <span class="header-logo-dice">🎲</span>
+            <div class="header-logo-text">
+                <span class="header-logo-name">MJ Facility</span>
+            </div>
+        </a>
+
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Lance tes dés</a></li>
+                <li><a href="connexion.html" class="nav-link">Profil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-admin">
+
+        <div class="page-entete">
+            <h1 class="page-title">Gestion des joueurs</h1>
+            <p class="page-subtitle">
+                Accordez ou révoquez l'accès aux fiches personnages
+            </p>
+        </div>
+
+        <div class="stats-barre">
+            <div class="stat-page">
+                <span id="nb-total" class="stat-number">0</span>
+                <span class="stat-label">Joueurs total</span>
+            </div>
+            <div class="stat-page">
+                <span id="nb-autorises" class="stat-number stat-number-or">0</span>
+                <span class="stat-label">Autorisés</span>
+            </div>
+            <div class="stat-page">
+                <span id="nb-attente" class="stat-number stat-number-gris">En attente</span>
+            </div>
+
+        </div>
+
+
+        <div class="barre-recherche">
+            <input type="text" id="recherche" class="input-recherche" placehorlder="Rechercher un joeur par pseudo ou email"/>
+        </div>
+
+        /* si aucun joueur */
+
+        <div id="message-vide" class="message-vide">
+            <span class="message-vide-icone">👤</span>
+            <p class="message-vide-text">Aucun joueur trouvé</p>
+        </div>
+
+        /* liste des joueurs */
+
+        <div id="liste-joueurs" class="liste-joueurs"></div>
+
+        /* déconnexion */
+
+        <div class="deconnexion-wrapper">
+            <button type="button" id="btn-deconnexion" class="btn-deconnexion"> 
+                Se déconnecter
+            </button>
+        </div>
+
+    </main>
+
+    /* modal fiche */
+
+    <div id="modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="modal-title" class="modal-title">Fiche de —</span>
+                <button type="button" id="modal-close" class="modal-close">
+                    ✕ Fermer
+                </button>
+            </div>
+            <div id="modal-body" class="modal-body"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <span class="footer-logo-dice">🎲</span>
+            <span class="footer-logo-name">MJ Facility</span>
+        </div>
+    </footer>
+</body>
+</html>
