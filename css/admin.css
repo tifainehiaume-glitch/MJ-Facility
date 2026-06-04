@@ -1,0 +1,247 @@
+/* mise en page */
+
+.page-admin {
+    flex: 1;
+    padding: 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* en-tete */
+
+.page-entete {
+    border-bottom: 2px solid var(--rouge);
+    padding-bottom: 1rem;
+}
+
+.page-title {
+    font-family: 'cinzel', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--noir);
+    margin-bottom: 4px;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: var(--gris-violet);
+    font-style: italic;
+}
+
+/* statistiques */
+.stats-barre {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.stas-fiche {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid rgba(107, 104, 120, 0.2);
+    padding: 1rem 1.25rem;
+    text-align: center;
+}
+
+.stat-number {
+    font-family: 'cinzel', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--rouge);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.stat-number-or { color: var(--or); }
+.stat-number-gris { color: var(--gris-violet); }
+
+.stat-label {
+    font-family: 'cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gris-violet);
+}
+
+/* barre de recherche */
+
+.input-recherche {
+    font-family: 'crimson text', serif;
+    font-size: 15px;
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid rgba(107, 104, 120, 0.3);
+    border-radius: 8px;
+    background: white;
+    color: var(--noir);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-recherche:focus { border-color: var(--or); }
+
+/* liste des joueurs */
+
+.liste-joueur {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.carte-joueur {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid rgba(107, 104, 120, 0.2);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: border-color 0.2s;
+}
+
+.carte-joueur:hover { border-color: rgba(107, 104, 120, 0.4); }
+
+.carte-joueur.autorise { border-left: 3px solid var(--or); }
+.carte-joueur.en-attente { border-left: 3px solid var(--gris-violet); }
+
+/* infos joueurs */
+
+.joueur-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.joueur-pseudo {
+    font-family: 'cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--noir);
+}
+
+.joueur-email {
+    font-size: 12px;
+    color: var(--gris-violet);
+    font-style: italic;
+}
+
+/* statut */
+
+.joueur-statut {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 130px;
+}
+
+/* badge */
+
+.badge {
+    font-family: 'cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    padding: 5px 12px;
+    white-space: nowrap;
+}
+
+.badge.autorise {
+    color: var(--or);
+    background: rgba(168, 145, 58, 0.1);
+    border: 1px solid rgba(168, 145, 58, 0.3);
+}
+
+.badge.en-attente {
+    color: var(--gris-violet);
+    background: rgba(107, 104, 120, 0.1);
+    border: 1px solid rgba(107, 104, 120, 0.3);
+}
+
+.badge.refuse {
+    color: var(--rouge);
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.badge.sans-fiche {
+    color: var(--rouge);
+    background: rgba(139, 0, 0, 0.8);
+    border: 1px solid rgba(139, 0, 0, 0.3);
+}
+
+/* actions */
+
+.joueur-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* voir fiche */
+
+.btn-voir-fiche {
+    font-family: 'cinzel', serif;
+    font-size: 9px; 
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    color: var(--noir);
+    background: var(--blanc-cassé);
+    border: 1px solid rgba(107, 104, 120, 0.4);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-voir-fiche:hover {
+    color: var(--noir);
+    background: var(--or);
+    border-color: var(--or);
+}
+
+.btn-voir-fiche:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.btn-voir-fiche:disabled:hover {
+    color: var(--noir);
+    background: var(--blanc-cassé);
+    border-color: rgba(107, 104, 120, 0.4);
+}
+
+/* boutons autoriser/révoquer */
+
+.btn-autoriser {
+    font-family: 'cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    color: var(--blanc-cassé);
+    background: var(--rouge);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(139, 0, 0, 0.4);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    white-space: nowrap;
+}
+
+.btn-autoriser:hover {
+    background: var(--or);
+    box-shadow: 0 3px 10px rgba(168, 0, 0, 0.4);
+}
+
+.btn-autoriser:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 10px rgba(168, 145, 58, 0.4);
+}
