@@ -93,7 +93,9 @@
     border-color: var(--rouge);
 }
 
-.erreur-banner {
+.error { display: none; }
+
+.bannerError {
     background: rgba(139, 0, 0, 0.08);
     border: 1px solid rgba(139, 0, 0, 0.04);
     border-radius: 8px;
@@ -101,7 +103,7 @@
     font-size: 14px;
     color: var(--rouge);
     margin-bottom: 1.25rem;
-    display: flex;
+    display: none;
 }
 
 .succes {
@@ -112,7 +114,7 @@
     font-size: 14px; 
     color: var(--noir);
     margin-bottom: 1.25rem;
-    display: flex;
+    display: none;
 }
 
 .button {

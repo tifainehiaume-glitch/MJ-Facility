@@ -2,7 +2,7 @@ const pseudo = document.getElementById("pseudo");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirm = document.getElementById("confirmPassword");
-const success = document.getElementById("succes");
+const succes = document.getElementById("succes");
 const bannerError = document.getElementById("bannerError");
 
 /*Fonction de Validation*/
@@ -39,10 +39,10 @@ function validerPassword() {
 function validerConfirm() {
     const ok = password.value === confirm.value && confirm.value !== '';
     if (ok) {
-        montrerValide(confirm, 'confirmError');
+        montrerValide(confirm, 'confirmPasswordError');
         return true;
     }
-    montrerErreur(confirm, 'confirmError');
+    montrerErreur(confirm, 'confirmPasswordError');
     return false;
 }
 
@@ -56,7 +56,7 @@ confirm.addEventListener('input', validerConfirm);
 
 /*Soumission avec fetch*/
 /*mettre le fetch ici*/
-async function soumettreFormulaire(event) {
+async function soumettreInscription(event) {
     event.preventDefault();
 
     const ok1 = validerPseudo();
@@ -65,6 +65,15 @@ async function soumettreFormulaire(event) {
     const ok4 = validerConfirm();
 
     if (ok1 && ok2 && ok3 && ok4) {
+        succes.style.display = 'block';
 
+        pseudo.value = '';
+        email.value = '';
+        password.value = '';
+        confirm.value = '';
+
+        setTimeout(() => {
+            window.location.href = 'connexion.html';
+        }, 2000);
     }
-}
+} 

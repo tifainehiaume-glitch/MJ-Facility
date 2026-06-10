@@ -1,4 +1,4 @@
-const joueur = [
+const joueurs = [
     {
         id: "user_1",
         pseudo: "JohnDoe",
@@ -88,14 +88,14 @@ function afficherJoueurs(liste) {
         const carte = document.createElement('div');
         carte.className = `carte-joueur ${joueur.aAcces ? 'autorise' : 'en-attente'}`;
 
-        let badgeHTML = '';
-        if (!joueur.aAcces) {
-            badgeHTML = '<span class="badge en-attente">En attente</span>';
-        } else if (!joueur.fiche) {
-            badgeHTML = '<span class="badge sans-fiche">Pas de fiche</span>';
-        } else {
-            badgeHTML = '<span class="badge autorise">✦ Fiche créée</span>';
-        }
+        const getBadge = (joueur) => {
+
+            if (!joueur.aAcces) return '<span class="badge en-attente">En attente</span>';
+            if (!joueur.fiche)  return '<span class="badge sans-fiche">Pas de fiche</span>';
+            return '<span class="badge autorise">✦ Fiche créée</span>';
+};
+
+        const badgeHTML = getBadge(joueur);
         
         const ficheDisabled = !joueur.fiche ? 'disabled' : '';
         const ficheTitle = !joueur.fiche ? 'title="Aucune fiche créée"' : '';
@@ -167,7 +167,7 @@ function ouvrirFiche(joueurId) {
                     <span class="modal-valeur">${f.statut}</span>
                 </div>
             </div>
-            <div class="modal-grille-2" style="margin-top: 8px;">
+            <div class="modal-grille-2 modal-grille-extra">
                 <div class="modal-champ">
                     <span class="modal-label">Profession</span>
                     <span class="modal-valeur">${f.profession}</span>
@@ -216,7 +216,7 @@ document.getElementById('modal').addEventListener('click', function(e) {
 });
 
 /* bouton fermer */
-document.getElementById('modal-fermer').addEventListener('click', fermerModal);
+document.getElementById('modal-close').addEventListener('click', fermerModal);
 
 /* autoriser/révoquer */
 
@@ -231,10 +231,10 @@ function donnerAcces(joueurId) {
     //     body: JSON.stringify({ aAcces: true })
     // }); */
 
-    const joueur = joueur.find(j => j.id === joueurId);
+    const joueur = joueurs.find(j => j.id === joueurId);
     if (joueur) {
         joueur.aAcces = true;
-        mettreAJourStats();
+        updateStats();
         afficherJoueurs(joueurs);
     }
 }
@@ -243,7 +243,7 @@ function revoquerAcces(joueurId) {
     const joueur = joueurs.find(j => j.id === joueurId);
     if (joueur) {
         joueur.aAcces = false;
-        mettreAJourStats();
+        updateStats();
         afficherJoueurs(joueurs);
     }
 }
@@ -252,7 +252,7 @@ function revoquerAcces(joueurId) {
 
 document.getElementById('recherche').addEventListener('input', function() {
     const texte = this.value.trim().toLowerCase();
-    const filtres = joueurs.filtrer(j =>
+    const filtres = joueurs.filter(j =>
         j.pseudo.toLowerCase().includes(texte) ||
         j.email.toLowerCase().includes(texte)
     );
@@ -268,5 +268,5 @@ document.getElementById('btn-deconnexion').addEventListener('click', () => {
 
 /* initialisation */
 
-mettreAJourStats();
+updateStats();
 afficherJoueurs(joueurs);

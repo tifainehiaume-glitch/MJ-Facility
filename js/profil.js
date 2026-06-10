@@ -1,12 +1,12 @@
 const affichagePseudo = document.getElementById('affichage-pseudo');
 const afficherEmail = document.getElementById('affichage-email');
-const avatarInitiale = document.getElementById('avatar-initiale');
+const avatarInitiale = document.getElementById('avatar-initial');
 const btnDeconnexion = document.getElementById('btn-deconnexion');
 
 /* données statistiques */
 
 const statsCaracteristiques = [
-    { nom: 'INIT',   id: 's-init',   min: 1,  max:10,  defaut: 1 },
+    { nom: 'INT',   id: 's-int',   min: 1,  max:10,  defaut: 1 },
     { nom: 'REF',   id: 's-ref',   min: 1,  max:10,  defaut: 1 },
     { nom: 'DEX',   id: 's-dex',   min: 1,  max:10,  defaut: 1 },
     { nom: 'COR',   id: 's-cor',   min: 1,  max:10,  defaut: 1 },
@@ -31,11 +31,11 @@ const statsDerivees = [
 
 const competences = [
     {
-        categorie: 'Intelliegnce',
+        categorie: 'Intelligence',
         colonne: 0,
         items: [
             { nom: 'Connaissance de la rue',    name:'connaissance-rue'},
-            { nom: 'Connaissance des montres',  name:'connaissance-montres'},
+            { nom: 'Connaissance des monstres',  name:'connaissance-monstres'},
             { nom: 'Déduction',                 name:'deduction'},
             { nom: 'Education',                 name:'education'},
             { nom: 'Enseignement',              name:'enseignement'},
@@ -43,7 +43,7 @@ const competences = [
             { nom: 'Langue ancienne',           name:'langue-ancienne'},
             { nom: 'Langue commune',            name:'langue-commune'},
             { nom: 'Langue naine',              name:'langue-naine'},
-            { nom: 'Négoce',                    name:'négoce'},
+            { nom: 'Négoce',                    name:'negoce'},
             { nom: 'Survie',                    name:'survie'},
             { nom: 'Tactique',                  name:'tactique'},
             { nom: 'Vigilance',                 name:'vigilance'},
@@ -59,7 +59,7 @@ const competences = [
             { nom: 'Escrime',              name:'escrime'},
             { nom: 'Esquive/Evasion',      name:'esquive'},
             { nom: 'Lames courtes',        name:'lames-courtes'},
-            { nom: 'Melée',                name:'melee'},
+            { nom: 'Mêlée',                name:'melee'},
             { nom: 'Navigation',           name:'navigation'},
         ]
     },
@@ -137,7 +137,7 @@ const localisationsArmure = [
 
 /* option "autre" */
 
-const champsAvecAutres = [
+const champsAvecAutre = [
     { selectId: 'f-race',             autreId: 'f-race-autre' },
     { selectId: 'f-terre',            autreId: 'f-terre-autre' },
     { selectId: 'f-statut',           autreId: 'f-statut-autre' },
@@ -145,7 +145,7 @@ const champsAvecAutres = [
     { selectId: 'f-comp-exclu',       autreId: 'f-comp-exclu-autre' },
 ];
 
-const valeurConnues = {
+const valeursConnues = {
     'f-race':          ['humain' , 'elfe', 'nain', 'semi-elfe', 'sorceleur', 'gnome'],
     'f-terre':         ['nilfgaard', 'temeria', 'redania', 'kaedwen', 'aedirn', 'skellige', 'kaer-morhen', 'cintra' ],
     'f-statut':        ['noble', 'marchand', 'paysan', 'hors-la-loi', 'mercenaire', 'mage-cour', 'clerc'],
@@ -155,13 +155,13 @@ const valeurConnues = {
 };
 
 function genererStats(stats, conteneurId) {
-    const conteneuer = document.getElementById(conteneurId);
+    const conteneur = document.getElementById(conteneurId);
 
     stats.forEach(stat => {
         const ligne = document.createElement('div');
         ligne.className = 'stat-row';
         ligne.innerHTML = ` 
-            <span class="stat-name">${stat.name}</span>
+            <span class="stat-name">${stat.nom}</span>
             <input
                 class="stat-input"
                 type="number"
@@ -172,7 +172,7 @@ function genererStats(stats, conteneurId) {
                 value="${stat.defaut}"
                 />  
         `;
-        conteneurId.appendChild(ligne);
+        conteneur.appendChild(ligne);
     });
 }
 
@@ -203,7 +203,7 @@ function genererCompetences() {
             const ligne = document.createElement('div');
             ligne.className = 'competence-row';
             ligne.innerHTML = `
-                <span class="competence-name">${item.name}</sapn>
+                <span class="competence-name">${item.name}</span>
                 <input
                     class="competence-input"
                     type="number"
@@ -224,7 +224,7 @@ function genererArmure() {
     const tbody = document.getElementById('tbody-armure');
 
     localisationsArmure.forEach(localisation => {
-        const name = localisation.toLowerCase().replace(- -genererArmure, '-');
+        const name = localisation.toLowerCase().replace(/ /g, '-');
         const ligne = document.createElement('tr');
         ligne.innerHTML = `
         <td>${localisation}</td>
@@ -236,7 +236,7 @@ function genererArmure() {
 };
 
 function initChampsAvecAutre() {
-    champsAvecAutres.forEach(champ => {
+    champsAvecAutre.forEach(champ => {
         const select = document.getElementById(champ.selectId);
         const autre = document.getElementById(champ.autreId);
 
@@ -277,12 +277,12 @@ async function chargerProfil() {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        window.localisation.href = '/html/connexion.html';
+        window.location.href = '/html/connexion.html';
         return;
     }
     try {
         const reponse = await fetch('/api/profil', {
-            headers: { 'Authorization': 'Bearer' + token }
+            headers: { 'Authorization': 'Bearer ' + token }
         });
         
         if (!reponse.ok) {
@@ -328,7 +328,7 @@ function remplirFiche(fiche) {
     setValeurChamp('f-comp-exclu',            'f-comp-exclu-autre',       fiche.competenceExclu     || '');
 
     [...statsCaracteristiques, ...statsDerivees].forEach(stat => {
-        const cle = stat.id.remplace('s-', '');
+        const cle = stat.id.replace('s-', '');
         document.getElementById(stat.id).value = fiche.stats?.[cle] ?? stat.defaut;
     });
 
@@ -342,7 +342,7 @@ function remplirFiche(fiche) {
         });
     });
 
-    document.getElementById('f-entraiment').value = fiche.entrainement  || '';
+    document.getElementById('f-entrainement').value = fiche.entrainement  || '';
     document.getElementById('f-notes').value  = fiche.notes  || '';
     document.getElementById('f-aptitudes').value = fiche.aptitudes || "";
 }
@@ -360,7 +360,8 @@ function collecterFiche() {
     const competencesData = {};
     competences.forEach(categorie => {
         categorie.items.forEach(items => {
-            const input = document.getElementById('c-' + item.value) || 0;
+            const input = document.getElementById('c-' + item.name); 
+            if (input) competencesData[item.name] = parseInt(input.value) || 0;
         });
     });
 
@@ -400,18 +401,18 @@ async function sauvegarderFiche(event) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer' + token
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(fiche)
         });
         if (reponse.ok) {
-            alerte('Fiche sauvegardée !');
+            alert('Fiche sauvegardée !');
         } else {
-            alerte('Erreur lords de la sauvegarde. ');
+            alert('Erreur lors de la sauvegarde.');
         }
     } catch (error) {
         console.error('Erreur sauvegarde:', error);
-        alerte('Impossible de contacter me serveur.');
+        alert('Impossible de contacter le serveur.');
     }
 }
 
