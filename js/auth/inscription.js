@@ -65,15 +65,37 @@ async function soumettreInscription(event) {
     const ok4 = validerConfirm();
 
     if (ok1 && ok2 && ok3 && ok4) {
-        succes.style.display = 'block';
+        try {
+            const reponse = await fetch('/api/auth/inscription', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    pseudo: pseudo.value,
+                    email: email.value,
+                    password: password.value,
+                })
+            });
 
-        pseudo.value = '';
-        email.value = '';
-        password.value = '';
-        confirm.value = '';
+            const data = await reponse.json();
 
-        setTimeout(() => {
-            window.location.href = 'connexion.html';
-        }, 2000);
+            if (reponse.ok) {
+                succes.style.display = 'block';
+                pseudo.value = '';
+                email.value = '';
+                password.value = '';
+                confirm.value = '';
+
+                setTimeout(() => {
+                    window.location.href = '/connexion.html';
+                }, 2000);
+            } else {
+                bannerError.style.display = 'block';
+                bannerError.textContent = data.message;
+            }
+        } catch (error) {
+            console.error('Erreur inscription:', error);
+        }
     }
 } 
