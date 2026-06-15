@@ -26,5 +26,38 @@ function validerPassword() {
 email.addEventListener('input', validerEmail);
 password.addEventListener('input', validerPassword);
 
-/*Soumission avec fetch*/
-/*mettre le fetch ici*/
+/* fetch */
+
+async function soumettreLogin(event) {
+    event.preventDefault();
+
+    const ok1 = validerEmail();
+    const ok2 = validerPassword();
+
+    if (ok1 && ok2) {
+        try {
+            const reponse = await fetch('api/auth/connexion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringly({
+                    email: email.value,
+                    password: password.value
+                })
+            });
+
+            const data = await reponse.json();
+
+            if (reponse.ok) {
+                localStorage.setItem('token', data.token);
+                window.location.href = '/profil.html';
+            } else {
+                bannerError.style.display = 'block';
+                bannerError.textContent = data.message;
+            }
+        } catch (error) {
+            console.error('Erreur connexion:', error)
+        } 
+    }
+}
