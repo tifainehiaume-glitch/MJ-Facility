@@ -220,31 +220,53 @@ document.getElementById('modal-close').addEventListener('click', fermerModal);
 
 /* autoriser/révoquer */
 
-function donnerAcces(joueurId) {
-    /* FAIRE LE FETCH APRES LE BACK END */
-    /* await fetch(`/api/admin/joueurs/${joueurId}/acces`, {
-    //     method: 'PATCH',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + localStorage.getItem('token')
-    //     },
-    //     body: JSON.stringify({ aAcces: true })
-    // }); */
+ async function donnerAcces(joueurId) {
+    
+    try {
+        const reponse = await fetch(`/api/admin/joueurs/${joueurId}/acces`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify({ aAcces: true})
+        });
 
-    const joueur = joueurs.find(j => j.id === joueurId);
-    if (joueur) {
-        joueur.aAcces = true;
-        updateStats();
-        afficherJoueurs(joueurs);
+        if (reponse.ok) {
+            const joueur = joueurs.find(j => j.id === joueurId);
+            if (joueur) {
+                joueur.aAcces = true;
+                updateStats();
+                afficherJoueurs(joueurs);
+            }
+        }
+    } catch (error) {
+        console.error('Erreur authorisation :', error);
     }
 }
 
-function revoquerAcces(joueurId) {
-    const joueur = joueurs.find(j => j.id === joueurId);
-    if (joueur) {
-        joueur.aAcces = false;
-        updateStats();
-        afficherJoueurs(joueurs);
+async function revoquerAcces(joueurId) {
+
+    try {
+        const reponse = await fetch(`/api/admin/joueurs/${joueurId}/acces`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify({ aAcces: false})
+        });
+
+        if (reponse.ok) {
+            const joueur = joueurs.find(j => j.id === joueurId);
+            if (joueur) {
+                joueur.aAcces = false;
+                updateStats();
+                afficherJoueurs(joueurs);
+            }
+        }
+    } catch (error) {
+        console.error('Erreur révocation :', error);
     }
 }
 
