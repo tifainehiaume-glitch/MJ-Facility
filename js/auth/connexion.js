@@ -41,7 +41,7 @@ async function soumettreLogin(event) {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringly({
+                body: JSON.stringify({
                     email: email.value,
                     password: password.value
                 })
