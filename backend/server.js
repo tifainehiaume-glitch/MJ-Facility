@@ -32,7 +32,7 @@ sequelize.authenticate()
 /* routes */
 
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/profil', require('./routes/profil'));
+app.use('/api/profil', require('./routes/profils'));
 app.use('/api/admin', require('./routes/admin'));
 
 /* création admin au démarrage */
