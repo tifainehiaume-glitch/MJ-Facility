@@ -9,6 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('../'));
 
 /* connexion mongoDB */
 
@@ -19,7 +20,7 @@ mongoose.connect(process.env.MONGO_URL)
 /* connexion mysql */
 
 async function connecterMySQL(tentatives = 10) {
-    for (let i = 1; 1 <= tentatives; i++) {
+    for (let i = 1; i <= tentatives; i++) {
         try {
             await sequelize.authenticate();
             console.log('MySQL connecté');
@@ -35,7 +36,7 @@ async function connecterMySQL(tentatives = 10) {
     console.error('Impossible de se connecter à MySQL après plusieurs tentatives');
 }
  connecterMySQL();
- 
+
 /* routes */
 
 app.use('/api/auth', require('./routes/auth'));
