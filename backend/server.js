@@ -18,17 +18,24 @@ mongoose.connect(process.env.MONGO_URL)
 
 /* connexion mysql */
 
-sequelize.authenticate()
-    .then(() => {
-        console.log('MySQL connecté');
-        return sequelize.sync();
-    })
-    .then(() => {
-        console.log('Tables MySQL synchronisées');
-        creerAdminSiAbsent();
-    })
-    .catch(err => console.error('Erreur MySQL :', err));
-
+async function connecterMySQL(tentatives = 10) {
+    for (let i = 1; 1 <= tentatives; i++) {
+        try {
+            await sequelize.authenticate();
+            console.log('MySQL connecté');
+            await sequelize.sync();
+            console.log('Tables MySQL synchronisées');
+            creerAdminSiAbsent();
+            return;
+        } catch (error) {
+            console.log(`MySQL pas encore prêt, tentative ${i}/${tentatives}...`);
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        }
+    }
+    console.error('Impossible de se connecter à MySQL après plusieurs tentatives');
+}
+ connecterMySQL();
+ 
 /* routes */
 
 app.use('/api/auth', require('./routes/auth'));
