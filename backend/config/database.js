@@ -8,7 +8,11 @@ const sequelize = new Sequelize(
         host: process.env.MYSQL_HOST,
         port: process.env.MYSQL_PORT,
         dialect: 'mysql',
-        logging: false
+        logging: false,
+        retry: {
+            max: 10,
+            timeout: 3000
+        }
     }
 );
 
