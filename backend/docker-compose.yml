@@ -15,6 +15,7 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     depends_on:
       - mongo
+      - mysql
     volumes:
       - .:/app
       - /app/node_modules
@@ -27,11 +28,32 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  mysql:
+    image: mysql:8
+    container_name: mjfacility-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: mjfacility-phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=mysql
+    depends_on:
+      - mysql
+
   mongo-express:
     image: mongo-express
     container_name: mjfacility-mongo-express
     ports:
-      - "8081-8081"
+      - "8081:8081"
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo
     depends_on:
@@ -39,3 +61,4 @@ services:
 
 volumes:
   mongo-data:
+  mysql-data:

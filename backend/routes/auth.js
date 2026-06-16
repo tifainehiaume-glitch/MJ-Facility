@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 const User = require('../models/user');
 
 router.post('/inscription', async (req, res) => {
@@ -9,7 +10,9 @@ router.post('/inscription', async (req, res) => {
         const { pseudo, email, password } = req.body;
 
         const existant = await User.findOne({
-            $or: [{ pseudo }, { email }]
+            where: { 
+                [Op.or]: [{ pseudo }, { email }]
+            }
         });
 
         if (existant) {
@@ -20,7 +23,7 @@ router.post('/inscription', async (req, res) => {
 
         const passwordHache = await bcrypt.hash(password, 10);
 
-        const nouvelUser = await User.create({
+        await User.create({
             pseudo,
             email,
             password: passwordHache
@@ -40,7 +43,8 @@ router.post('/connexion', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ where: { email } });
+
         if (!user) {
             return res.status(401).json({
                 message: 'Email ou mot de passe incorrect'
@@ -56,7 +60,7 @@ router.post('/connexion', async (req, res) => {
         }
 
         const token = jwt.sign(
-            { userId: user._id, role: user.role },
+            { userId: user.id, role: user.role },
             process.env.JWT_SECRET,
             { expiresIn: '7d' }
 
