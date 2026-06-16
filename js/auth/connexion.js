@@ -36,7 +36,7 @@ async function soumettreLogin(event) {
 
     if (ok1 && ok2) {
         try {
-            const reponse = await fetch('api/auth/connexion', {
+            const reponse = await fetch('/api/auth/connexion', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
