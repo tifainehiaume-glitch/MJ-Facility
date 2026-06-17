@@ -5,6 +5,13 @@ const jwt = require('jsonwebtoken');
 const { Op } = require('sequelize');
 const User = require('../models/user');
 
+const router = express.Router();
+
+router.use((req, res, next) => {
+    console.log('Requête reçue dans auth.js :', req.method, req.url);
+    next();
+});
+
 router.post('/inscription', async (req, res) => {
     try {
         const { pseudo, email, password } = req.body;
