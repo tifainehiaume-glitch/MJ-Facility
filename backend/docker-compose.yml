@@ -17,6 +17,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      - ..:/frontend
 
   mongo:
     image: mongo:6
