@@ -11,6 +11,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('../'));
 
+app.get('/test', (req, res) => {
+    res.json({ message: 'Le serveur fonctionne !' });
+});
+
 /* connexion mongoDB */
 
 mongoose.connect(process.env.MONGO_URL)
