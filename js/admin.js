@@ -179,7 +179,7 @@ document.getElementById('modal').addEventListener('click', function(e) {
     if (e.target === this) fermerModal();
 });
 
-document.getElementById('modal-fermer').addEventListener('click', fermerModal);
+document.getElementById('modal-close').addEventListener('click', fermerModal);
 
 /* authoriser et refuser */
 
