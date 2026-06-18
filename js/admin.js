@@ -1,78 +1,46 @@
-const joueurs = [
-    {
-        id: "user_1",
-        pseudo: "JohnDoe",
-        email: "johndoe@example.com",
-        aAcces: true,
-        fiche: {
-            nom: "Geralt de Riv", race: "Sorceleur", genre: "Homme",
-            age: 95, terre: "Kaer Morhen", statut: "Connaissance", 
-            stats: {
-                int: 7, ref: 9, dex: 8, cor: 8, vit: 7, emp: 5, tech: 6, vol: 6, cha: 6 },
-            competences: [
-                { nom: "Escrime", val: 10 },
-                { nom: "Connaissance des monstres", val: 9 },
-                { nom: "Esquive/Evasion", val: 8 },
-                { nom: "Alchimie", val: 8 },
-                { nom: "Survie", val: 7 },
-                { nom: "Vigilance", val: 6 },
-            ]
-        }
-    },
-    {
-        id: "user_2",
-        pseudo: "JaneSmith",
-        email: "janesmith@example.com",
-        aAcces: true,
-        fiche: {
-            nom: "Yennefer de Vengerberg", race: "Sorcière", genre: "Femme",
-            age: 94, terre: "Vengerberg", statut: "Incantation",
-            stats: {
-                int: 10, ref: 6, dex: 7, cor: 5, vit: 6, emp: 8, tech: 7, vol: 9, cha: 8 },
-            competences: [
-                { nom: "Incantation", val: 10 },
-                { nom: "Education", val: 9 },
-                { nom: "Résistance à la magie", val: 9 },
-                { nom: "Persuasion", val: 8 },
-                { nom: "Déduction", val: 8 },
-                { nom: "Rituels", val: 7 },
-            ]
-        }
-    },
-    {
-        id: "user_3",
-        pseudo: "BobBrown",
-        email: "bobbrown@example.com",
-        aAcces: false,
-        fiche: null
-    },
-    {
-        id: "user_4",
-        pseudo: "AliceGreen",
-        email: "alicegreen@example.com",
-        aAcces: false,
-        fiche: null
-    },
-    {
-        id: "user_5",
-        pseudo: "CharlieBlack",
-        email: "charlieblack@example.com",
-        aAcces: false,
-        fiche: null
-    },
-];
+let joueurs = []; 
 
-/* mise à jour des statistiques */
+async function chargerJoueurs() {
+    const token = localStorage.getItem('token');
 
-function updateStats() {
-    document.getElementById('nb-total').textContent = joueurs.length;
-    document.getElementById('nb-autorises').textContent = joueurs.filter(j => j.aAcces).length;
-    document.getElementById('nb-attente').textContent = joueurs.filter(j => !j.aAcces).length;
+    if (!token) {
+        window.location.href = '/connexion.html';
+        return;
+    }
+
+    try {
+        const reponse = await fetch('/api/admin/joueurs', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+
+        if (!reponse.ok) {
+            window.location.href = '/connexion.html';
+            return;
+        }
+
+        joueurs = await reponse.json();
+        updateStats();
+        afficherJoueurs(joueurs);
+
+    } catch (error) {
+        console.error('Erreur chargement joueurs :', error);
+    }
 }
 
-/* afficher la liste des joueurs */
+/* statistiques */
+
+function updateStats() {
+    document.getElementById('nb-total').textContent     = joueurs.length;
+    document.getElementById('nb-autorises').textContent = joueurs.filter(j => j.aAcces).length;
+    document.getElementById('nb-attente').textContent   = joueurs.filter(j => !j.aAcces).length;
+}
+
+/* afficher la liste */
+
 function afficherJoueurs(liste) {
-    const conteneur = document.getElementById('liste-joueurs');
+    const conteneur   = document.getElementById('liste-joueurs');
     const messageVide = document.getElementById('message-vide');
 
     conteneur.innerHTML = '';
@@ -89,16 +57,14 @@ function afficherJoueurs(liste) {
         carte.className = `carte-joueur ${joueur.aAcces ? 'autorise' : 'en-attente'}`;
 
         const getBadge = (joueur) => {
-
             if (!joueur.aAcces) return '<span class="badge en-attente">En attente</span>';
             if (!joueur.fiche)  return '<span class="badge sans-fiche">Pas de fiche</span>';
             return '<span class="badge autorise">✦ Fiche créée</span>';
-};
+        };
 
-        const badgeHTML = getBadge(joueur);
-        
+        const badgeHTML     = getBadge(joueur);
         const ficheDisabled = !joueur.fiche ? 'disabled' : '';
-        const ficheTitle = !joueur.fiche ? 'title="Aucune fiche créée"' : '';
+        const ficheTitle    = !joueur.fiche ? 'title="Aucune fiche créée"' : '';
 
         carte.innerHTML = `
             <div class="joueur-info">
@@ -107,13 +73,13 @@ function afficherJoueurs(liste) {
             </div>
             <div class="joueur-statut">${badgeHTML}</div>
             <div class="joueur-actions">
-                <button 
+                <button
                     type="button"
                     class="btn-voir-fiche"
                     onclick="ouvrirFiche('${joueur.id}')"
                     ${ficheDisabled}
                     ${ficheTitle}>
-                    📜 Voir la fiche 
+                    📜 Voir la fiche
                 </button>
                 ${joueur.aAcces
                     ? `<button type="button" class="btn-revoquer" onclick="revoquerAcces('${joueur.id}')">Révoquer</button>`
@@ -126,85 +92,83 @@ function afficherJoueurs(liste) {
     });
 }
 
-/* modal */
+async function ouvrirFiche(joueurId) {
+    const token = localStorage.getItem('token');
 
-function ouvrirFiche(joueurId) {
-    const joueur = joueurs.find(j => j.id === joueurId);
-    if (!joueur || !joueur.fiche) return;
+    try {
+        const reponse = await fetch(`/api/admin/joueurs/${joueurId}/fiche`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
 
-    const f = joueur.fiche;
+        if (!reponse.ok) return;
 
-    document.getElementById('modal-title').textContent =
-        `Fiche de ${joueur.pseudo} — ${f.nom}`;
+        const f = await reponse.json();
+        const joueur = joueurs.find(j => j.id == joueurId);
 
-    document.getElementById('modal-body').innerHTML = `
+        document.getElementById('modal-title').textContent =
+            `Fiche de ${joueur ? joueur.pseudo : ''} — ${f.nom || ''}`;
 
-        <div class="modal-section">
-            <div class="modal-section-title">Identité</div>
-            <div class="modal-grille-3">
-                <div class="modal-champ">
-                    <span class="modal-label">Nom</span>
-                    <span class="modal-valeur">${f.nom}</span>
-                </div>
-                <div class="modal-champ">
-                    <span class="modal-label">Race</span>
-                    <span class="modal-valeur">${f.race}</span>
-                </div>
-                <div class="modal-champ">
-                    <span class="modal-label">Genre</span>
-                    <span class="modal-valeur">${f.genre}</span>
-                </div>
-                <div class="modal-champ">
-                    <span class="modal-label">Âge</span>
-                    <span class="modal-valeur">${f.age} ans</span>
-                </div>
-                <div class="modal-champ">
-                    <span class="modal-label">Terre natale</span>
-                    <span class="modal-valeur">${f.terre}</span>
-                </div>
-                <div class="modal-champ">
-                    <span class="modal-label">Statut social</span>
-                    <span class="modal-valeur">${f.statut}</span>
-                </div>
-            </div>
-            <div class="modal-grille-2 modal-grille-extra">
-                <div class="modal-champ">
-                    <span class="modal-label">Profession</span>
-                    <span class="modal-valeur">${f.profession}</span>
-                </div>
-                <div class="modal-champ">
-                    <span class="modal-label">Compétence exclusive</span>
-                    <span class="modal-valeur">${f.competenceExclu}</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-section">
-            <div class="modal-section-titre">Statistiques</div>
-            <div class="modal-stats-grille">
-                ${Object.entries(f.stats).map(([cle, val]) => `
-                    <div class="modal-stat-box">
-                        <span class="modal-stat-nom">${cle.toUpperCase()}</span>
-                        <span class="modal-stat-val">${val}</span>
+        document.getElementById('modal-body').innerHTML = `
+            <div class="modal-section">
+                <div class="modal-section-title">Identité</div>
+                <div class="modal-grille-3">
+                    <div class="modal-champ">
+                        <span class="modal-label">Nom</span>
+                        <span class="modal-valeur">${f.nom || '—'}</span>
                     </div>
-                `).join('')}
-            </div>
-        </div>
-
-        <div class="modal-section">
-            <div class="modal-section-titre">Compétences principales</div>
-            <div class="modal-competences-grille">
-                ${f.competences.map(c => `
-                    <div class="modal-competence-ligne">
-                        <span>${c.nom}</span>
-                        <span class="modal-competence-score">${c.val}</span>
+                    <div class="modal-champ">
+                        <span class="modal-label">Race</span>
+                        <span class="modal-valeur">${f.race || '—'}</span>
                     </div>
-                `).join('')}
+                    <div class="modal-champ">
+                        <span class="modal-label">Genre</span>
+                        <span class="modal-valeur">${f.genre || '—'}</span>
+                    </div>
+                    <div class="modal-champ">
+                        <span class="modal-label">Âge</span>
+                        <span class="modal-valeur">${f.age ? f.age + ' ans' : '—'}</span>
+                    </div>
+                    <div class="modal-champ">
+                        <span class="modal-label">Terre natale</span>
+                        <span class="modal-valeur">${f.terre || '—'}</span>
+                    </div>
+                    <div class="modal-champ">
+                        <span class="modal-label">Statut social</span>
+                        <span class="modal-valeur">${f.statut || '—'}</span>
+                    </div>
+                </div>
+                <div class="modal-grille-2 modal-grille-extra">
+                    <div class="modal-champ">
+                        <span class="modal-label">Profession</span>
+                        <span class="modal-valeur">${f.profession || '—'}</span>
+                    </div>
+                    <div class="modal-champ">
+                        <span class="modal-label">Compétence exclusive</span>
+                        <span class="modal-valeur">${f.competenceExclu || '—'}</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    `;
 
-    document.getElementById('modal').classList.add('open');
+            <div class="modal-section">
+                <div class="modal-section-title">Statistiques</div>
+                <div class="modal-stats-grille">
+                    ${f.stats ? Object.entries(f.stats).map(([cle, val]) => `
+                        <div class="modal-stat-box">
+                            <span class="modal-stat-nom">${cle.toUpperCase()}</span>
+                            <span class="modal-stat-val">${val}</span>
+                        </div>
+                    `).join('') : '—'}
+                </div>
+            </div>
+        `;
+
+        document.getElementById('modal').classList.add('open');
+
+    } catch (error) {
+        console.error('Erreur chargement fiche :', error);
+    }
 }
 
 function fermerModal() {
@@ -215,13 +179,11 @@ document.getElementById('modal').addEventListener('click', function(e) {
     if (e.target === this) fermerModal();
 });
 
-/* bouton fermer */
-document.getElementById('modal-close').addEventListener('click', fermerModal);
+document.getElementById('modal-fermer').addEventListener('click', fermerModal);
 
-/* autoriser/révoquer */
+/* authoriser et refuser */
 
- async function donnerAcces(joueurId) {
-    
+async function donnerAcces(joueurId) {
     try {
         const reponse = await fetch(`/api/admin/joueurs/${joueurId}/acces`, {
             method: 'PATCH',
@@ -229,24 +191,19 @@ document.getElementById('modal-close').addEventListener('click', fermerModal);
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
-            body: JSON.stringify({ aAcces: true})
+            body: JSON.stringify({ aAcces: true })
         });
 
         if (reponse.ok) {
-            const joueur = joueurs.find(j => j.id === joueurId);
-            if (joueur) {
-                joueur.aAcces = true;
-                updateStats();
-                afficherJoueurs(joueurs);
-            }
+            await chargerJoueurs(); 
         }
+
     } catch (error) {
-        console.error('Erreur authorisation :', error);
+        console.error('Erreur autorisation :', error);
     }
 }
 
 async function revoquerAcces(joueurId) {
-
     try {
         const reponse = await fetch(`/api/admin/joueurs/${joueurId}/acces`, {
             method: 'PATCH',
@@ -254,17 +211,13 @@ async function revoquerAcces(joueurId) {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             },
-            body: JSON.stringify({ aAcces: false})
+            body: JSON.stringify({ aAcces: false })
         });
 
         if (reponse.ok) {
-            const joueur = joueurs.find(j => j.id === joueurId);
-            if (joueur) {
-                joueur.aAcces = false;
-                updateStats();
-                afficherJoueurs(joueurs);
-            }
+            await chargerJoueurs(); 
         }
+
     } catch (error) {
         console.error('Erreur révocation :', error);
     }
@@ -281,7 +234,7 @@ document.getElementById('recherche').addEventListener('input', function() {
     afficherJoueurs(filtres);
 });
 
-/* deconnexion */
+/* déconnexion */
 
 document.getElementById('btn-deconnexion').addEventListener('click', () => {
     localStorage.removeItem('token');
@@ -290,5 +243,4 @@ document.getElementById('btn-deconnexion').addEventListener('click', () => {
 
 /* initialisation */
 
-updateStats();
-afficherJoueurs(joueurs);
+chargerJoueurs(); 

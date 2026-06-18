@@ -44,7 +44,7 @@ router.get('/joueurs', verifierToken, verifierAdmin, async (req, res) => {
     }
 });
 
-router.patch('/joueurs/id:/acces', verifierToken, verifierAdmin, async (req, res) => {
+router.patch('/joueurs/:id/acces', verifierToken, verifierAdmin, async (req, res) => {
     try {
         const { id } = req.params;
         const { aAcces } = req.body;
