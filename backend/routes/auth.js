@@ -71,7 +71,7 @@ router.post('/connexion', async (req, res) => {
 
         );
 
-            res.json({ token });
+            res.json({ token, role: user.role });
 
         } catch (error) {
             console.error('Erreur connexion :', error);

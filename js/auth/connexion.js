@@ -51,13 +51,20 @@ async function soumettreLogin(event) {
 
             if (reponse.ok) {
                 localStorage.setItem('token', data.token);
-                window.location.href = '/profil.html';
+
+                if (data.role === 'admin') {
+                    window.location.href = '/admin.html';   
+                } else {
+                    window.location.href = '/profil.html';  
+                }
+
             } else {
                 bannerError.style.display = 'block';
                 bannerError.textContent = data.message;
             }
+
         } catch (error) {
-            console.error('Erreur connexion:', error)
-        } 
+            console.error('Erreur connexion:', error);
+        }
     }
 }
