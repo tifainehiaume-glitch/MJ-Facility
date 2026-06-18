@@ -203,7 +203,7 @@ function genererCompetences() {
             const ligne = document.createElement('div');
             ligne.className = 'competence-row';
             ligne.innerHTML = `
-                <span class="competence-name">${item.name}</span>
+                <span class="competence-name">${item.nom}</span>
                 <input
                     class="competence-input"
                     type="number"
@@ -359,7 +359,7 @@ function collecterFiche() {
 
     const competencesData = {};
     competences.forEach(categorie => {
-        categorie.items.forEach(items => {
+        categorie.items.forEach(item => {
             const input = document.getElementById('c-' + item.name); 
             if (input) competencesData[item.name] = parseInt(input.value) || 0;
         });
@@ -370,7 +370,7 @@ function collecterFiche() {
         age:                 document.getElementById('f-age').value,
         particularite:       document.getElementById('f-particularite').value,
         genre:               document.getElementById('f-genre').value,
-         race:            getValeurChamp('f-race',            'f-race-autre'),
+        race:            getValeurChamp('f-race',            'f-race-autre'),
         terre:           getValeurChamp('f-terre',            'f-terre-autre'),
         statut:          getValeurChamp('f-statut',           'f-statut-autre'),
         profession:      getValeurChamp('f-profession',       'f-profession-autre'),

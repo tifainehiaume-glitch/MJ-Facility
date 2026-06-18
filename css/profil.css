@@ -45,7 +45,7 @@
     box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
 }
 
-.avatar-initials {
+.avatar-initial {
     font-family: 'cinzel', serif;
     font-size: 20px;
     font-weight: 600;
@@ -115,7 +115,7 @@
     margin-bottom: 0;
 }
 
-.fiche.header {
+.fiche-header {
     background: var(--noir);
     padding: 0.75rem 1.25rem;
 }
@@ -128,7 +128,7 @@
     color: var(--or);
 }
 
-.fiche.body {
+.fiche-body {
     padding: 1.25rem;
 }
 
@@ -159,7 +159,7 @@
     opacity: 0.3;
 }
 
-.message.title {
+.message-title {
     font-family: 'cinzel', serif;
     font-size: 14px;
     color: var(--noir);
@@ -173,7 +173,7 @@
     line-height: 1.6;
 }
 
-.message-attente {
+.badge-attente {
     font-family: 'cinzel', serif;
     font-size: 9px;
     letter-spacing: 1.5px;
@@ -208,7 +208,7 @@
 
 .grille-stats-extra { margin-top: 1rem;}
 
-.champ-aptitude {
+.champ-aptitudes {
     margin-top: 0.75rem;
 }
 
@@ -308,7 +308,7 @@
 
 .grille-competences {
     display: grid;
-    grid-template-columns: repeat(3. 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
 
@@ -379,7 +379,7 @@
 .arme-row:last-child {border-bottom: none; }
 .arme-label { font-size: 11px; color: var(--or); }
 
-.arme.input {
+.arme-input {
     width: 100px;
     padding: 2px 6px;
     border: 1px solid rgba(107, 104, 120, 0.30);
