@@ -277,7 +277,7 @@ async function chargerProfil() {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        window.location.href = '/html/connexion.html';
+        window.location.href = '/connexion.html';
         return;
     }
     try {
@@ -287,7 +287,7 @@ async function chargerProfil() {
         
         if (!reponse.ok) {
             localStorage.removeItem('token');
-            window.location.href = '/html/connexion.html';
+            window.location.href = '/connexion.html';
             return;
         }
 
@@ -420,7 +420,7 @@ async function sauvegarderFiche(event) {
 
 btnDeconnexion.addEventListener('click', () => {
     localStorage.removeItem('token');
-    window.location.href = '/html/connexion.html'
+    window.location.href = '/connexion.html'
 });
 
 /* initilisation */

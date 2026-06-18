@@ -285,7 +285,7 @@ document.getElementById('recherche').addEventListener('input', function() {
 
 document.getElementById('btn-deconnexion').addEventListener('click', () => {
     localStorage.removeItem('token');
-    window.location.href = '/html/connexion.html';
+    window.location.href = '/connexion.html';
 });
 
 /* initialisation */
