@@ -134,7 +134,7 @@
 
 /*section cachées par defaut*/
 
-#sans-acces, #sans-fiche, #avec-fiche, #sections-fiche {
+#sans-acces, #sans-fiche, #avec-fiche, #section-fiche {
     display: none;
 }
 
