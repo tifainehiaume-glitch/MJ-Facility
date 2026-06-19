@@ -146,12 +146,12 @@
 
 /*section cachées par defaut*/
 
-#sans-acces, #sans-fiche, #avec-fiche, #section-fiche {
+#sans-acces, #sans-fiche, #avec-fiche {
     display: none;
 }
 
 #section-fiche {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 1.5rem;
     margin-top: 1.5rem;
