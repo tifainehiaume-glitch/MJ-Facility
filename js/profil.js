@@ -303,7 +303,7 @@ async function chargerProfil() {
             document.getElementById('sans-fiche').style.display = 'block';
         } else {
             document.getElementById('avec-fiche').style.display = 'block';
-            document.getElementById('section-fiche').style.display = 'block';
+            document.getElementById('section-fiche').style.display = 'flex';
             remplirFiche(data.fiche);
         }
     } catch (error) {

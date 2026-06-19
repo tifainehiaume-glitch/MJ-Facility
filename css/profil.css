@@ -117,7 +117,6 @@
     border-radius: 12px;
     border: 1px solid rgba(107, 104, 120, 0.25);
     overflow: hidden;
-    margin-bottom: 1.5rem;
 }
 
 .fiche-container:last-child {
@@ -145,6 +144,12 @@
 
 #sans-acces, #sans-fiche, #avec-fiche, #section-fiche {
     display: none;
+}
+
+#section-fiche {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 #f-race-autre, #f-terre-autre, #f-statut-autre, #f-profession-autre, #f-comp-exclu-autre { 
