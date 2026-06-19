@@ -390,7 +390,7 @@ function collecterFiche() {
 
 /* Sauvegarde */
 
-async function sauvegardeFiche(event) {
+async function sauvegarderFiche(event) {
     event.preventDefault();
 
     const token = localStorage.getItem('token');
