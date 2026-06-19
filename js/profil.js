@@ -187,6 +187,7 @@ function genererCompetences() {
         document.createElement('div'),
     ];
 
+    colonnes[0].className = 'bloc-colonne';
     colonnes[1].className = 'bloc-colonne';
     colonnes[2].className = 'bloc-colonne';
 
