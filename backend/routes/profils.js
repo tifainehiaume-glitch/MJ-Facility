@@ -22,7 +22,7 @@ router.get('/', verifierToken, async (req, res) => {
             pseudo: user.pseudo,
             email: user.email,
             aAcces: user.aAcces,
-            fiche: user.fiche
+            fiche: fiche
         });
 
     } catch (error) {
@@ -43,7 +43,7 @@ router.post('/fiche', verifierToken, async (req, res) => {
             return res.status(403).json({ message: 'Accès non autorisé' });
         }
 
-        if (user.fiche) {
+        if (user.ficheId) {
             await Fiche.findByIdAndUpdate(user.ficheId, req.body);
         } else {
             const nouvelleFiche = await Fiche.create(req.body);
@@ -51,7 +51,7 @@ router.post('/fiche', verifierToken, async (req, res) => {
             await user.save();
         }
 
-        res.json({ message: 'Fiche sauvegardé :', error });
+        res.json({ message: 'Fiche sauvegardé :' });
 
     } catch (error) {
         console.error('Erreur sauvegarde fiche :', error);
