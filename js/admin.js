@@ -1,5 +1,76 @@
 let joueurs = []; 
 
+const competencesAdmin = [
+    { items: [
+        { nom: 'Connaissance de la rue',    name:'connaissance-rue'},
+        { nom: 'Connaissance des monstres', name:'connaissance-monstres'},
+        { nom: 'Déduction',                 name:'deduction'},
+        { nom: 'Education',                 name:'education'},
+        { nom: 'Enseignement',              name:'enseignement'},
+        { nom: 'Etiquette',                 name:'etiquette'},
+        { nom: 'Langue ancienne',           name:'langue-ancienne'},
+        { nom: 'Langue commune',            name:'langue-commune'},
+        { nom: 'Langue naine',              name:'langue-naine'},
+        { nom: 'Négoce',                    name:'negoce'},
+        { nom: 'Survie',                    name:'survie'},
+        { nom: 'Tactique',                  name:'tactique'},
+        { nom: 'Vigilance',                 name:'vigilance'},
+        { nom: 'Bagarre',                   name:'bagarre'},
+        { nom: 'Bâton/Lance',               name:'baton-lance'},
+        { nom: 'Equitation',                name:'equitation'},
+        { nom: 'Escrime',                   name:'escrime'},
+        { nom: 'Esquive/Evasion',           name:'esquive'},
+        { nom: 'Lames courtes',             name:'lames-courtes'},
+        { nom: 'Mêlée',                     name:'melee'},
+        { nom: 'Navigation',                name:'navigation'},
+        { nom: 'Adresse',                   name:'adresse'},
+        { nom: 'Arbalète',                  name:'arbalete'},
+        { nom: 'Archerie',                  name:'archerie'},
+        { nom: 'Athlétisme',                name:'athletisme'},
+        { nom: 'Furtivité',                 name:'furtivite'},
+        { nom: 'Physique',                  name:'physique'},
+        { nom: 'Résilience',                name:'resilience'},
+        { nom: 'Beaux-arts',                name:'beaux-arts'},
+        { nom: 'Charisme',                  name:'charisme'},
+        { nom: 'Commandement',              name:'commandement'},
+        { nom: 'Duperie',                   name:'duperie'},
+        { nom: 'Jeu',                       name:'jeu'},
+        { nom: 'Persuasion',                name:'persuasion'},
+        { nom: 'Psychologie',               name:'psychologie'},
+        { nom: 'Représentation',            name:'representation'},
+        { nom: 'Séduction',                 name:'seduction'},
+        { nom: 'Stylisme',                  name:'stylisme'},
+        { nom: 'Alchimie',                  name:'alchimie'},
+        { nom: 'Artisanat',                 name:'artisanat'},
+        { nom: 'Contrefaçon',               name:'contrefacon'},
+        { nom: 'Crochetage',                name:'crochetage'},
+        { nom: 'Déguisement',               name:'deguisement'},
+        { nom: 'Fabrication de pièges',     name:'fabrication-pieges'},
+        { nom: 'Premiers soins',            name:'premiers-soins'},
+        { nom: 'Courage',                   name:'courage'},
+        { nom: 'Envoûtement',               name:'envoutement'},
+        { nom: 'Incantation',               name:'incantation'},
+        { nom: 'Intimidation',              name:'intimidation'},
+        { nom: 'Résistance à la contrainte',name:'resistance-contrainte'},
+        { nom: 'Résistance à la magie',     name:'resistance-magie'},
+        { nom: 'Rituels',                   name:'rituels'},
+    ]}
+];
+
+const armeLabels = {
+    precision:      'Précision',
+    degats:         'Dégâts',
+    fiabilite:      'Fiabilité',
+    mains:          'Mains',
+    portee:         'Portée',
+    effet:          'Effet',
+    dissimulation:  'Dissimulation',
+    amelioration:   'Amélioration',
+    poids:          'Poids'
+};
+
+const localisationsArmureAdmin = ['Tête','Torse','Bras droit','Bras gauche','Jambe droite','Jambe gauche'];
+
 async function chargerJoueurs() {
     const token = localStorage.getItem('token');
 
@@ -160,6 +231,68 @@ async function ouvrirFiche(joueurId) {
                             <span class="modal-stat-val">${val}</span>
                         </div>
                     `).join('') : '—'}
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <div class="modal-section-title">Compétences formées</div>
+                <div class="modal-competences-grille">
+                    ${competencesAdmin
+                        .flatMap(cat => cat.items)
+                        .filter(item => (f.competences?.[item.name] || 0) > 0)
+                        .map(item => `
+                            <div class="modal-competences-line">
+                                <span>${item.nom}</span>
+                                <span class="modal-competences-score">${f.competences[item.name]}</span>
+                            </div>
+                        `).join('') || '<span class="modal-valeur">Aucune compétence formée.</span>'}
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <div class="modal-section-title">Équipement — Arme primaire</div>
+                <div class="modal-grille-3">
+                    ${Object.entries(armeLabels).map(([cle, label]) => `
+                        <div class="modal-champ">
+                            <span class="modal-label">${label}</span>
+                            <span class="modal-valeur">${f.armes?.[cle] || '—'}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <div class="modal-section-title">Équipement — Armure</div>
+                <div class="modal-grille-2">
+                    ${localisationsArmureAdmin.map(loc => {
+                        const cle = loc.toLowerCase().replace(/ /g, '-');
+                        const pa = f.armure?.[`armure-${cle}-pa`] ?? 0;
+                        const degats = f.armure?.[`armure-${cle}-degats`] ?? 0;
+                        return `
+                            <div class="modal-champ">
+                                <span class="modal-label">${loc}</span>
+                                <span class="modal-valeur">PA ${pa} · Dégâts ${degats}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <div class="modal-section-title">Entraînement &amp; Notes</div>
+                <div class="modal-grille-2">
+                    <div class="modal-champ">
+                        <span class="modal-label">Entraînement</span>
+                        <span class="modal-valeur">${f.entrainement || '—'}</span>
+                    </div>
+                    <div class="modal-champ">
+                        <span class="modal-label">Notes</span>
+                        <span class="modal-valeur">${f.notes || '—'}</span>
+                    </div>
+                </div>
+                <div class="modal-champ" style="margin-top:8px">
+                    <span class="modal-label">Aptitudes professionnelles</span>
+                    <span class="modal-valeur">${f.aptitudes || '—'}</span>
                 </div>
             </div>
         `;
