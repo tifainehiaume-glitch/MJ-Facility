@@ -377,7 +377,7 @@ function collecterFiche() {
 
     const armesData = {};
     document.querySelectorAll('.arme-input').forEach(input => {
-        const cle = input.name.replace('arme', '');
+        const cle = input.name.replace('arme-', '');
         armesData[cle] = input.value;
     });
 
@@ -399,6 +399,8 @@ function collecterFiche() {
 
         stats:         stats,
         competences:   competencesData,
+        armes: armesData,
+        armure: armureData,
 
         reputation:    parseInt(document.getElementById('f-reputation').value)   || 0,
         progression:   parseInt(document.getElementById('f-progression').value)  || 0,

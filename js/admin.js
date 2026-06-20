@@ -108,7 +108,7 @@ async function ouvrirFiche(joueurId) {
         const joueur = joueurs.find(j => j.id == joueurId);
 
         document.getElementById('modal-title').textContent =
-            `Fiche de ${joueur ? joueur.pseudo : ''} — ${f.nom || ''}`;
+            `Fiche de ${joueur ? joueur.pseudo : ''} — ${f.name || ''}`;
 
         document.getElementById('modal-body').innerHTML = `
             <div class="modal-section">
@@ -116,7 +116,7 @@ async function ouvrirFiche(joueurId) {
                 <div class="modal-grille-3">
                     <div class="modal-champ">
                         <span class="modal-label">Nom</span>
-                        <span class="modal-valeur">${f.nom || '—'}</span>
+                        <span class="modal-valeur">${f.name || '—'}</span>
                     </div>
                     <div class="modal-champ">
                         <span class="modal-label">Race</span>
