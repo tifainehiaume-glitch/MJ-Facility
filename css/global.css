@@ -71,7 +71,7 @@ body {
     font-family: 'Cinzel', serif;
     font-size: 10px;
     letter-spacing: 1.5px;
-    text-overflow: uppercase;
+    text-transform: uppercase;
     color: var(--blanc-casse);
     text-decoration: none;
     padding: 8px 14px;

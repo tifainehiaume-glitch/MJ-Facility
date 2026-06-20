@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ficheSchema = new mongoose.Schema({
 
     /* identité */
-    nom:                { type: String, default: '' },
+    name:                { type: String, default: '' },
     race:               { type: String, default: '' },
     genre:              { type: String, default: '' },
     age:                { type: String, default: '' },

@@ -343,6 +343,15 @@ function remplirFiche(fiche) {
         });
     });
 
+    document.querySelectorAll('.arme-input').forEach(input => {
+        const cle = input.name.replace('arme-', '');
+        input.value = fiche.armes?.[cle] || '';
+    });
+
+    document.querySelectorAll('.td-input').forEach(input => {
+        input.value = fiche.armure?.[input.name] ?? 0;
+    });
+
     document.getElementById('f-entrainement').value = fiche.entrainement  || '';
     document.getElementById('f-notes').value  = fiche.notes  || '';
     document.getElementById('f-aptitudes').value = fiche.aptitudes || "";
@@ -364,6 +373,17 @@ function collecterFiche() {
             const input = document.getElementById('c-' + item.name); 
             if (input) competencesData[item.name] = parseInt(input.value) || 0;
         });
+    });
+
+    const armesData = {};
+    document.querySelectorAll('.arme-input').forEach(input => {
+        const cle = input.name.replace('arme', '');
+        armesData[cle] = input.value;
+    });
+
+    const armureData = {};
+    document.querySelectorAll('.td-input').forEach(input => {
+        armureData[input.name] = parseInt(input.value) || 0;
     });
 
     return {
