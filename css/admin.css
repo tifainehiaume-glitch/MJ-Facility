@@ -193,7 +193,7 @@
     text-transform: uppercase;
     padding: 8px 14px;
     color: var(--noir);
-    background: var(--blanc-cassé);
+    background: var(--blanc-casse);
     border: 1px solid rgba(107, 104, 120, 0.4);
     border-radius: 6px;
     cursor: pointer;
@@ -214,7 +214,7 @@
 
 .btn-voir-fiche:disabled:hover {
     color: var(--noir);
-    background: var(--blanc-cassé);
+    background: var(--blanc-casse);
     border-color: rgba(107, 104, 120, 0.4);
 }
 
@@ -226,7 +226,7 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
     padding: 8px 16px;
-    color: var(--blanc-cassé);
+    color: var(--blanc-casse);
     background: var(--rouge);
     border: none;
     border-radius: 6px;
@@ -363,7 +363,7 @@
     font-size: 10px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--blanc-cassé);
+    color: var(--blanc-casse);
     background: transparent;
     border: 1px solid rgba(227, 226, 223, 0.3);
     border-radius: 6px;
@@ -420,7 +420,7 @@
 .modal-valeur {
     font-size: 14px;
     color: var(--noir);
-    background: var(--blanc-cassé);
+    background: var(--blanc-casse);
     padding: 6px 10px;
     border-radius: 6px;
     border: 1px solid rgba(107, 104, 120, 0.15);
@@ -435,7 +435,7 @@
 }
 
 .modal-stats-box {
-    background: var(--blanc-cassé);
+    background: var(--blanc-casse);
     border-radius: 6px;
     padding: 8px;
     text-align: center;
@@ -473,7 +473,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 3px 8px;
-    background: var(--blanc-cassé);
+    background: var(--blanc-casse);
     border-radius: 4px;
 }
 
