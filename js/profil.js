@@ -300,8 +300,16 @@ async function chargerProfil() {
 
         if (!data.aAcces) {
             document.getElementById('sans-acces').style.display = 'block';
+
         } else if (!data.fiche) {
             document.getElementById('sans-fiche').style.display = 'block';
+
+            document.getElementById('btn-creer').addEventListener('click', () => {
+                document.getElementById('sans-fiche').style.display = 'none';
+                document.getElementById('avec-fiche').style.display = 'block';
+                document.getElementById('section-fiche').style.display= 'flex';
+            });
+            
         } else {
             document.getElementById('avec-fiche').style.display = 'block';
             document.getElementById('section-fiche').style.display = 'flex';
