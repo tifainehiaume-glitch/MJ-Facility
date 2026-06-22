@@ -27,7 +27,7 @@ const User = sequelize.define('User', {
     },
     aAcces: {
         type: DataTypes.BOOLEAN,
-        dafaultValue: false
+        defaultValue: false
     },
     ficheId: {
         type: DataTypes.STRING,

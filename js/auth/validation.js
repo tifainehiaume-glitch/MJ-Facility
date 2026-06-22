@@ -16,6 +16,6 @@ function montrerValide(input, erreurId) {
 
 /*reset les champs et les erreurs*/
 function reinitialiser(input, erreurId) {
-    input.classList.remove('valide', 'erreurId');
+    input.classList.remove('valide', 'erreur-champ');
     document.getElementById(erreurId).style.display = 'none';
 }

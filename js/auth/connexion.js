@@ -26,6 +26,9 @@ function validerPassword() {
 email.addEventListener('input', validerEmail);
 password.addEventListener('input', validerPassword);
 
+email.addEventListener('focus', () => reinitialiser(email, 'emailError'));
+password.addEventListener('focus', () => reinitialiser(password, 'passwordError'));
+
 /* fetch */
 
 async function soumettreLogin(event) {

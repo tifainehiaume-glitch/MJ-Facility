@@ -54,8 +54,12 @@ password.addEventListener('input', () => {
 });
 confirm.addEventListener('input', validerConfirm);
 
+pseudo.addEventListener('focus', () => reinitialiser(pseudo, 'pseudoError'));
+pseudo.addEventListener('focus', () => reinitialiser(email, 'emailError'));
+pseudo.addEventListener('focus', () => reinitialiser(password, 'passwordError'));
+confirm.addEventListener('focus', () => reinitialiser(confirm, 'confirmPasswordError'));
+
 /*Soumission avec fetch*/
-/*mettre le fetch ici*/
 async function soumettreInscription(event) {
     event.preventDefault();
 
