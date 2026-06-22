@@ -39,6 +39,7 @@ async function connecterMySQL(tentatives = 10) {
     }
     console.error('Impossible de se connecter à MySQL après plusieurs tentatives');
 }
+require('./models/log');
  connecterMySQL();
 
 /* routes */

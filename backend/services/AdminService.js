@@ -44,7 +44,23 @@ class AdminService {
         user.aAcces = aAcces;
         await user.save();
 
+        await Log.create({
+            action: aAcces ? 'acces_accorde' : 'acces_revoque',
+            adminId: adminId,
+            joueurId: parseInt(id)
+        });
+
         return { message: 'Accès mis à jour'};
+    }
+
+    async listerLogs() {
+        return await Log.findAll({
+            order: [['createdAt', 'DESC']],
+            include: [
+                { model: User, as: 'admin', attributes: ['pseudo'] },
+                { model: User, as: 'joueur', attributes: ['pseudo'] }
+            ]
+        });
     }
 }
 

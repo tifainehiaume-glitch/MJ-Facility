@@ -23,7 +23,7 @@ router.get('/joueurs', verifierToken, verifierAdmin, async (req, res) => {
 
 router.patch('/joueurs/:id/acces', verifierToken, verifierAdmin, async (req, res) => {
     try {
-        const result = await AdminService.modifierAcces(req.params.id, req.body.aAcces);
+        const result = await AdminService.modifierAcces(req.params.id, req.body.aAcces, req.user.userId);
         res.json(result);
     } catch (error) {
         res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
@@ -40,6 +40,15 @@ router.get('/joueurs/:id/fiche', verifierToken, verifierAdmin, async (req, res) 
         }
 
         res.json(joueur.fiche);
+    } catch (error) {
+        res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
+    }
+});
+
+router.get('/logs', verifierToken, verifierAdmin, async (req, res) => {
+    try {
+        const logs = await AdminService.listerLogs();
+        res.json(logs);
     } catch (error) {
         res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
     }
