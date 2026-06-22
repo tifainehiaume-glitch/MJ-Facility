@@ -309,7 +309,7 @@ async function chargerProfil() {
                 document.getElementById('avec-fiche').style.display = 'block';
                 document.getElementById('section-fiche').style.display= 'flex';
             });
-            
+
         } else {
             document.getElementById('avec-fiche').style.display = 'block';
             document.getElementById('section-fiche').style.display = 'flex';
@@ -421,7 +421,7 @@ function collecterFiche() {
 
 /* Sauvegarde */
 
-async function sauvegarderFiche(event) {
+async function sauvegarderFiche() {
     event.preventDefault();
 
     const token = localStorage.getItem('token');
@@ -462,3 +462,5 @@ genererCompetences();
 genererArmure();
 initChampsAvecAutre();
 chargerProfil();
+
+document.getElementById('btn-sauvegarder').addEventListener('click', sauvegarderFiche);
