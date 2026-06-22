@@ -7,6 +7,7 @@ class UserService {
         if (!user) {
             const error = new Error('Utilisateur introuvable');
             error.statut = 404;
+            throw error;
         }
 
         return user;
