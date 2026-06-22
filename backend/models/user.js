@@ -44,6 +44,6 @@ User.hasMany(Log, { foreignKey: 'adminId', as: 'logsAdmin' });
 Log.belongsTo(User, { foreignKey: 'adminId', as: 'admin'});
 
 User.hasMany(Log, { foreignKey: 'joueurId', as: 'logsJoueur' });
-User.belongsTo(User, { foreignKey: 'joueurId', as: 'joueur'});
+Log.belongsTo(User, { foreignKey: 'joueurId', as: 'joueur'});
 
 module.exports = User;

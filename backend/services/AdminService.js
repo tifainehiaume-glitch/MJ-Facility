@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const FicheService = require('./FicheService');
+const Log = require('../models/log');
 
 class AdminService {
     async verifierAdmin(userId) {
@@ -32,7 +33,7 @@ class AdminService {
         );
         return joueurs;
     }
-    async modifierAcces(id, aAcces) {
+    async modifierAcces(id, aAcces, adminId) {
         const user = await User.findByPk(id);
 
         if (!user) {
