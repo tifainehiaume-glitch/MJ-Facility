@@ -19,7 +19,7 @@ CREATE TABLE Logs (
     action      ENUM('acces_accorde', 'acces_revoque')  NOT NULL,
     adminId     INT                                     NOT NULL,
     joueurId    INT                                     NOT NULL,
-    createdAt   TIMESTAMP                               DEFAULT CURRENT_TIMESRAMP,
+    createdAt   TIMESTAMP                               DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_logs_admin
         FOREIGN KEY     (adminId)
