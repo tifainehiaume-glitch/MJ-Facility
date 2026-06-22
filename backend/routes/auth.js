@@ -15,7 +15,7 @@ router.post('/inscription', async (req, res) => {
 router.post('/connexion', async (req, res) => {
     try {
         const { email, password } = req.body;
-        const result = await AuthService.connecter(email, password );
+        const result = await AuthService.connecter(email, password);
         res.json(result);
     } catch (error) {
         res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });

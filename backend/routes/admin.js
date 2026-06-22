@@ -1,44 +1,45 @@
 const express = require('express');
 const router = express.Router();
 const verifierToken = require('../middleware/verifierToken');
-const UserService = require('../services/UserService');
-const FicheService = require('../services/FicheService');
+const AdminService = require('../services/AdminService');
 
-router.get('/', verifierToken, async (req, res) => {
+async function verifierAdmin(req, res, next) {
     try {
-        const user = await UserService.trouverParId(req.user.userId);
+        await AdminService.verifierAdmin(req.user.userId);
+        next();
+    } catch (error) {
+        res.status(error.statut || 403).json({ message: error.message });
+    }
+}
 
-        let fiche = null;
-        if (user.ficheId) {
-            fiche = await FicheService.charger(user.ficheId);
-        }
-
-        res.json({
-            pseudo: user.pseudo,
-            email: user.email,
-            aAcces: user.aAcces,
-            fiche: fiche
-        });
+router.get('/joueurs', verifierToken, verifierAdmin, async (req, res) => {
+    try {
+        const joueurs = await AdminService.listerJoueurs();
+        res.json(joueurs);
     } catch (error) {
         res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
     }
 });
 
-router.post('/fiche', verifierToken, async (req, res) => {
+router.patch('/joueurs/:id/acces', verifierToken, verifierAdmin, async (req, res) => {
     try {
-        const user = await UserService.trouverParId(req.user.userId);
+        const result = await AdminService.modifierAcces(req.params.id, req.body.aAcces);
+        res.json(result);
+    } catch (error) {
+        res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
+    }
+});
 
-        if (!user.aAcces) {
-            return res.status(403).json({ message: 'Accès non autorisé' });
+router.get('/joueurs/:id/fiche', verifierToken, verifierAdmin, async (req, res) => {
+    try {
+        const joueurs = await AdminService.listerJoueurs();
+        const joueur = joueurs.find(j => j.id === parseInt(req.params.id));
+
+        if (!joueur || !joueur.fiche) {
+            return res.status(404).json({ message: 'Fiche introuvable' });
         }
 
-        const result = await FicheService.sauvegarder(user.ficheId, req.body);
-
-        if (result.nouveau) {
-            await UserService.lierFiche(user.id, result.ficheId);
-        }
-
-        res.json({ message: 'Fiche sauvegardée' });
+        res.json(joueur.fiche);
     } catch (error) {
         res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
     }

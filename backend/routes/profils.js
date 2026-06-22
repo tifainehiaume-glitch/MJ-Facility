@@ -1,21 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
-const Fiche = require('../models/fiche');
 const verifierToken = require('../middleware/verifierToken');
+const UserService = require('../services/UserService');
+const FicheService = require('../services/FicheService');
 
 router.get('/', verifierToken, async (req, res) => {
     try {
-
-        const user = await User.findByPk(req.user.userId);
-
-        if (!user) {
-            return res.status(404).json({ message: 'Utilisateur introuvable' });
-        }
+        const user = await UserService.trouverParId(req.user.userId);
 
         let fiche = null;
         if (user.ficheId) {
-            fiche = await Fiche.findById(user.ficheId);
+            fiche = await FicheService.charger(user.ficheId);
         }
 
         res.json({
@@ -24,38 +19,28 @@ router.get('/', verifierToken, async (req, res) => {
             aAcces: user.aAcces,
             fiche: fiche
         });
-
     } catch (error) {
-        console.error('Erreur récupération profil :', error);
-        res.status(500).json({ message: 'Erreur serveur' });
+        res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
     }
 });
 
 router.post('/fiche', verifierToken, async (req, res) => {
     try {
-        const user = await User.findByPk(req.user.userId);
-
-        if (!user) {
-            return res.status(404).json({ message: 'Utilisateur introuvable' });
-        }
+        const user = await UserService.trouverParId(req.user.userId);
 
         if (!user.aAcces) {
             return res.status(403).json({ message: 'Accès non autorisé' });
         }
 
-        if (user.ficheId) {
-            await Fiche.findByIdAndUpdate(user.ficheId, req.body);
-        } else {
-            const nouvelleFiche = await Fiche.create(req.body);
-            user.ficheId = nouvelleFiche._id.toString();
-            await user.save();
+        const result = await FicheService.sauvegarder(user.ficheId, req.body);
+
+        if (result.nouveau) {
+            await UserService.lierFiche(user.id, result.ficheId);
         }
 
-        res.json({ message: 'Fiche sauvegardé :' });
-
+        res.json({ message: 'Fiche sauvegardée' });
     } catch (error) {
-        console.error('Erreur sauvegarde fiche :', error);
-        res.status(500).json({ message: 'Erreur serveur' });
+        res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
     }
 });
 
