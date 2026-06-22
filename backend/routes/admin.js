@@ -1,88 +1,46 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
-const Fiche = require('../models/fiche');
 const verifierToken = require('../middleware/verifierToken');
+const UserService = require('../services/UserService');
+const FicheService = require('../services/FicheService');
 
-async function verifierAdmin(req, res, next) {
-    const user = await User.findByPk(req.user.userId);
-
-    if (!user || user.role !== 'admin') {
-        return res.status(403).json({ message: 'Accès réservé aux administrateurs' });
-    }
-
-    next();
-}
-
-router.get('/joueurs', verifierToken, verifierAdmin, async (req, res) => {
+router.get('/', verifierToken, async (req, res) => {
     try {
-        const users = await User.findAll({
-            where: { role: 'joueur' }
+        const user = await UserService.trouverParId(req.user.userId);
+
+        let fiche = null;
+        if (user.ficheId) {
+            fiche = await FicheService.charger(user.ficheId);
+        }
+
+        res.json({
+            pseudo: user.pseudo,
+            email: user.email,
+            aAcces: user.aAcces,
+            fiche: fiche
         });
-
-        const joueurs = await Promise.all(
-            users.map(async (user) => {
-                let fiche = null;
-                if (user.ficheId) {
-                    fiche = await Fiche.findById(user.ficheId);
-                }
-
-                return {
-                    id: user.id,
-                    pseudo: user.pseudo,
-                    email: user.email,
-                    aAcces: user.aAcces,
-                    fiche: fiche
-                };
-            })
-        );
-
-        res.json(joueurs);
     } catch (error) {
-        console.error('Erreur récupération joueurs :', error);
-        res.status(500).json({ message: 'Erreur serveur' });
+        res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
     }
 });
 
-router.patch('/joueurs/:id/acces', verifierToken, verifierAdmin, async (req, res) => {
+router.post('/fiche', verifierToken, async (req, res) => {
     try {
-        const { id } = req.params;
-        const { aAcces } = req.body;
+        const user = await UserService.trouverParId(req.user.userId);
 
-        const user = await User.findByPk(id);
-
-        if (!user) {
-            return res.status(404).json({ message: 'Joueur introuvable' });
+        if (!user.aAcces) {
+            return res.status(403).json({ message: 'Accès non autorisé' });
         }
 
-        user.aAcces = aAcces;
-        await user.save();
+        const result = await FicheService.sauvegarder(user.ficheId, req.body);
 
-        res.json({ message: 'Accès mis à jour' });
-
-    } catch (error) {
-        console.error('Erreur mise à jour accès :', error);
-        res.status(500).json({ message: 'Erreur serveur' });
-    }
-});
-
-router.get('/joueurs/:id/fiche', verifierToken, verifierAdmin, async (req, res) => {
-    try {
-        const { id } = req.params;
-
-        const user = await User.findByPk(id);
-
-        if (!user || !user.ficheId) {
-            return res.status(404).json({ message: 'Fiche introuvable' });
+        if (result.nouveau) {
+            await UserService.lierFiche(user.id, result.ficheId);
         }
 
-        const fiche = await Fiche.findById(user.ficheId);
-
-        res.json(fiche);
-
+        res.json({ message: 'Fiche sauvegardée' });
     } catch (error) {
-        console.error('Erreur récupération fiche :', error);
-        res.status(500).json({ message: 'Erreur serveur' });
+        res.status(error.statut || 500).json({ message: error.message || 'Erreur serveur' });
     }
 });
 
