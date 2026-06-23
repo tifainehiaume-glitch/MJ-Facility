@@ -1,3 +1,5 @@
+const { sauvegarder } = require("../backend/services/FicheService");
+
 const affichagePseudo = document.getElementById('affichage-pseudo');
 const afficherEmail = document.getElementById('affichage-email');
 const avatarInitiale = document.getElementById('avatar-initial');
@@ -308,12 +310,14 @@ async function chargerProfil() {
                 document.getElementById('sans-fiche').style.display = 'none';
                 document.getElementById('avec-fiche').style.display = 'block';
                 document.getElementById('section-fiche').style.display= 'flex';
+                document.getElementById('btn-sauvegarder').addEventListener('click', sauvegarderFiche);
             });
 
         } else {
             document.getElementById('avec-fiche').style.display = 'block';
             document.getElementById('section-fiche').style.display = 'flex';
             remplirFiche(data.fiche);
+            document.getElementById('btn-sauvegarder').addEventListener('click', sauvegarderFiche);
         }
     } catch (error) {
         console.error('Erreur chargement profil :', error);
@@ -461,5 +465,3 @@ genererCompetences();
 genererArmure();
 initChampsAvecAutre();
 chargerProfil();
-
-document.getElementById('btn-sauvegarder').addEventListener('click', sauvegarderFiche);
