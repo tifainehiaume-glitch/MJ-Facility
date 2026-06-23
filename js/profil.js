@@ -1,5 +1,3 @@
-const { sauvegarder } = require("../backend/services/FicheService");
-
 const affichagePseudo = document.getElementById('affichage-pseudo');
 const afficherEmail = document.getElementById('affichage-email');
 const avatarInitiale = document.getElementById('avatar-initial');
