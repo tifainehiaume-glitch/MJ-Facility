@@ -483,3 +483,38 @@
     font-weight: 600;
     color: var(--rouge);
 }
+
+/* media query */
+
+@media (max-width: 768px) {
+    .page-admin { padding: 1rem; }
+
+    .modal { padding: 1rem; }
+
+    .modal-content {
+        padding: 0;
+        max-height: 95vh;
+    }
+
+    .modal-grille-2,
+
+    .modal-grille-3 { grid-template-columns: 1fr; }
+
+    .modal-stats-grille { grid-template-columns: repeat(2, 1fr); }
+
+    .modal-competences-grille { grid-template-columns: 1fr; }
+
+    .joueur-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .joueur-actions {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn-voir-fiche, .badge.autorise { flex: 1; }
+}
