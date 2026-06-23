@@ -122,3 +122,30 @@ body {
     color: var(--blanc-casse);
     opacity: 0.6;
 }
+
+/* media query */
+
+@media (max-width: 768px) {
+    .header {
+        padding: 0 1rem;
+        height: auto;
+        min-height: 56px;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .nav-list { gap: 2px; }
+
+    .nav-link {
+        font-size: 9px;
+        padding: 6px 10px;
+    }
+
+    .footer {
+        padding: 1rem;
+        justify-content: center;
+        text-align: center;
+    }
+}
