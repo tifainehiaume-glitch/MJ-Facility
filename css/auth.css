@@ -174,3 +174,17 @@
 .link a:hover {
     text-decoration: underline;
 }
+
+/* media query */
+
+@media (max-width: 768px) {
+    .page-auth { padding: 1rem; }
+
+    .auth-card { padding: 1.5rem 1rem; }
+
+    .auth-card input {
+        font-size: 16px;
+        padding: 8px 10px;
+        background: #f7f6f4;
+    }
+}
