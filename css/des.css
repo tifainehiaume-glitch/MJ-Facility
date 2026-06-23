@@ -207,3 +207,34 @@ main {
     transform: scale(0.97);
     box-shadow: none;
 }
+
+/* media query */
+
+@media (max-width: 768px) {
+    #container {
+        flex-direction: column;
+        min-height: unset;
+    }
+
+    .page-gauche {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(107, 104, 120, 0.15);
+        padding: 1rem;
+    }
+
+    .dice-input input {
+        font-size: 16px;
+        padding: 6px 8px;
+        background: #f7f6f4;
+    }
+
+    .milieu-page { padding: 1rem; }
+
+    .buttons { gap: 10px; }
+
+    .btn-roll, .btn-reset {
+        padding: 14px 20px;
+        font-size: 11px;
+    }
+}
