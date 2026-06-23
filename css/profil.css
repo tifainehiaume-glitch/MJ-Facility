@@ -476,3 +476,68 @@ tr:last-child td {border-bottom: none; }
     transform: scale(0.97);
     box-shadow: none;
 }
+
+/* media query */
+
+@media (max-width: 768px) {
+    .page-profil {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .page-compte-solo { max-width: 100%; }
+
+    .grille-2 { grid-template-columns: 1fr; }
+    .grille-3 { grid-template-columns: 1fr; }
+    .grille-stats { grid-template-columns: 1fr; }
+    .grille-competences { grid-template-columns: 1fr; }
+    .grille-equipement { grid-template-columns: 1fr; }
+
+    .grille-stats-extra { padding: 0 1rem 1rem; }
+
+    .fiche-body { padding: 1rem; }
+
+    .champ-fiche input,
+    .champ-fiche textarea,
+    .champ-fiche select {
+        font-size: 16px;
+        padding: 8px 10px;
+        background: #f7f6f4;
+    }
+
+    .champ-fiche label { font-size: 9px; }
+
+    .stat-row { padding: 3px 6px; }
+
+    .stat-input {
+        width: 36px;
+        font-size: 12px;
+        padding: 2px 3px;
+        color: var(--rouge);
+        background: #f7f6f4;
+        border: 1px solid rgba(107, 104, 120, 0.20);
+    }
+
+    .competence-name { font-size: 10px; }
+
+    .arme-input {
+        width: 100px;
+        font-size: 14px;
+        padding: 4px 8px;
+        background: #f7f6f4;
+    }
+
+    .td-input {
+        width: 36px;
+        font-size: 12px;
+        padding: 2px 4px;
+        color: var(--rouge);
+        background: #f7f6f4;
+    }
+
+    .btn-creer, .btn-sauvegarder {
+        padding: 16px;
+        font-size: 12px;
+    }
+}
