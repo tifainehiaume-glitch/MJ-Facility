@@ -9,39 +9,19 @@ application pour lancer de dés et pour création de fiche de personnage.
 ## Lancement
 
 ```bash
-git clone https://github.com/votre-utilisateur/DossierProjet.git
+git clone [https://github.com/votre-utilisateur/DossierProjet.git](https://github.com/tifainehiaume-glitch/MJ-Facility.git)
 cd DossierProjet/backend
 cp .env.example .env
 docker-compose up --build
 ```
 
-##Accès 
+## Accès 
 
-|
-Interface
-|
-URL
-|
-|
----
-|
----
-|
-|
-MJ Facility
-|
-http://localhost:3000
-|
-|
-PhpMyAdmin
-|
-http://localhost:8080
-|
-|
-Mongo Express
-|
-http://localhost:8081
-|
+| Interface | URL |
+|---|---|
+| MJ Facility | http://localhost:3000 |
+| PhpMyAdmin | http://localhost:8080 |
+| Mongo Express | http://localhost:8081 |
 
 ## Stack
 
