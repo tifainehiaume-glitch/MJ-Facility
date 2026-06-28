@@ -42,7 +42,7 @@ services:
     image: phpmyadmin
     container_name: mjfacility-phpmyadmin
     ports:
-      - "8080:80"
+      - "8081:80"
     environment:
       - PMA_HOST=mysql
     depends_on:
@@ -52,7 +52,7 @@ services:
     image: mongo-express
     container_name: mjfacility-mongo-express
     ports:
-      - "8081:8081"
+      - "8082:8081"
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo
     depends_on:
